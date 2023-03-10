@@ -23,8 +23,8 @@ def scrape_global_giving(url):
         data = bot.crawl() 
         with transaction.atomic():
             GlobalGivingNGO.objects.create(**data)
-            GlobalGivingIndexedUrl.objects.filter(url=url).update(is_scraped=True)
-            logger.info(f"SUCCESS: Scraped {url}")
+        GlobalGivingIndexedUrl.objects.filter(url=url).update(is_scraped=True)
+        logger.info(f"SUCCESS: Scraped {url}")
             
     except IntegrityError as e:
         # skip if already exists

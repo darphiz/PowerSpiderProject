@@ -1,15 +1,18 @@
+import logging
 from contextlib import suppress
 from datetime import timedelta
 from guidestar_app.models import SessionTracker
 from guidestar_app.utils import get_full_region_name
-from ngo_scraper.loggers import guide_star_log
-from ngo_scraper.requests import CleanData, CauseGenerator, ImageDownloader, ProxyRequestClient
+from ngo_scraper.notification import Notify
+from ngo_scraper.requests import CleanData, CauseGenerator, Helper, ImageDownloader, ProxyRequestClient
 from bs4 import BeautifulSoup
 import json
 from django.utils import timezone
+import re
+from django.conf import settings
 
-log = guide_star_log()
-
+log = logging.getLogger(__name__)
+HOOK = settings.GUIDESTAR_HOOK
 class GuideStarException(Exception):
     pass
 
@@ -68,7 +71,9 @@ class GuideStarScraper(
             ProxyRequestClient, 
             CleanData, 
             CauseGenerator, 
-            ImageDownloader
+            ImageDownloader,
+            Helper,
+            Notify
             ):
     """
     This will scrape all indexed url
@@ -83,7 +88,8 @@ class GuideStarScraper(
         self.endpoint = f"{self.base_url}{self.url}"
         self.organization_address = ""
         self.organization_name = ""
-        self.image_path = "                         "
+        self.image_path = "images/guidestar/"
+        self.webhook_url = HOOK
         return super().__init__()
     
     def login(self):
@@ -114,6 +120,11 @@ class GuideStarScraper(
             })
         if response.status_code != 200:
             log.error(f"Error logging in to guide star - {response.status_code}")
+            self.alert(
+                Notify.error(
+                    f"Error logging in to guide star - {response.status_code}"
+                )
+            )
             raise GuideStarException("Cannot login")
         cookies = response.cookies
         self.session.cookies.update(cookies)
@@ -122,6 +133,9 @@ class GuideStarScraper(
         SessionTracker.objects.create(cookies=cookie_string)
         return
         
+    def is_email(self, email_addr):
+        return re.match(r"[^@]+@[^@]+\.[^@]+", email_addr)
+    
     def _get_organization_name(self, soup):
         with suppress(Exception):
             selector = "#profileHeader > div.col-lg-9 > h1"
@@ -147,20 +161,21 @@ class GuideStarScraper(
         return self.clean_text(merged_address)
     
     
-    
     def _get_country(self):
         with suppress(Exception):
             address = self.organization_address
             words = address.split()
-            return next(
+            country = next(
                 (
                     " ".join(words[i + 1 :])
                     for i, word in enumerate(words)
                     if word.isdigit() and len(word) >= 5
                 ).strip(),
-                "united states",
-            )
-        return "united states"
+                "United States of America",
+            ) 
+            
+            return self.clean_country(country) 
+        return "United States of America"
     
     def _get_state(self):
         with suppress(Exception):
@@ -200,7 +215,8 @@ class GuideStarScraper(
             class_name = "__cf_email__"
             if email := soup.find_all("a", class_=class_name):
                 encoded_email = email[0].get("data-cfemail")
-                return self.decode_email(encoded_email)
+                email_addr = self.clean_emails(self.decode_email(encoded_email))
+                return email_addr if self.is_email(email_addr) else None
         return None
         
     def _get_phone(self, soup):
@@ -209,20 +225,23 @@ class GuideStarScraper(
             if phone := soup.find_all("p", class_=class_):
                 for p in phone:
                     if p.text.strip().startswith("Fundraising contact phone"):
-                        return p.text.split(":")[1].strip()
+                        return self.clean_phone(p.text.split(":")[1].strip())
         return None
         
     def _get_website(self, soup):
         with suppress(Exception):
             if website := soup.find("span", class_="website"):
                 link = website.find("a")
-                return link.get("href")
+                return self.clean_link(link.get("href"))
         return None
     
     def _get_mission(self, soup):
+        ignore_sentence = "this organization has not provided guidestar with a mission statement."
         with suppress(Exception):
             if mission_p := soup.find("p", id="mission-statement"):
-                return mission_p.text.strip()
+                mission_statement = mission_p.text.strip()
+                if mission_statement.lower() != ignore_sentence.lower():
+                    return self.clean_text(mission_statement)                
         return None
     
     def _get_government_number(self, soup):
@@ -231,7 +250,7 @@ class GuideStarScraper(
             for p in section_header:
                 if p.text.strip() == "EIN":
                     next_sibling = p.find_next_sibling("p")
-                    return next_sibling.text.strip()
+                    return self.clean_number(next_sibling.text.strip())
         return None
 
     def _get_reg_date_year(self, soup):
@@ -270,11 +289,11 @@ class GuideStarScraper(
         data["country"] = self.clean_text(self._get_country())
         data["state"] = self.clean_text(self._get_state())
         data["cause"] = self.clean_text(self._get_cause(soup))
-        data["email"] = self.clean_emails(self._get_email(soup))
+        data["email"] = self._get_email(soup)
         data["phone"] = self.clean_phone(self._get_phone(soup))
         data["website"] = self.clean_link(self._get_website(soup))
         data["mission"] = self.clean_text(self._get_mission(soup))
-        data["govt_reg_number"] = self.clean_number(self._get_government_number(soup))
+        data["govt_reg_number"] = self.clean_number(self._get_government_number(soup)).replace("-", "")
         data["govt_reg_number_type"] = "EIN" if data.get("govt_reg_number") else None
         data["registration_date_year"] = self.clean_number(self._get_reg_date_year(soup))
         data["image"] = self._get_image(soup)

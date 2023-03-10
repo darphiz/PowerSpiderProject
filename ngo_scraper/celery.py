@@ -20,10 +20,10 @@ SCRAPER_Q = {
     # },
        
     # Scraper to scrape data from global_giving website
-    "gg_url_crawler": {
-        "task": "start_scraping_gg",
-        "schedule": 20.0,
-    }
+    # "gg_url_crawler": {
+    #     "task": "start_scraping_gg",
+    #     "schedule": 65.0,
+    # }
     
     # FCRA scraper
     # "fcr_data_spider": {
@@ -31,17 +31,12 @@ SCRAPER_Q = {
     #     "schedule": 20.0,
     # }
     
-    # index guide star urls
-    # "index_guidestar_url" : {
-    #     "task": "index_guidestar_url",
-    #     "schedule": 60.0,
-    # }   ,
     
     # scrape guide star indexed urls
-    # "start_scraping_guidestar" : {
-    #     "task": "start_scraping_guidestar",
-    #     "schedule": 120.0,
-    # },
+    "start_scraping_guidestar" : {
+        "task": "start_scraping_guidestar",
+        "schedule": 40.0,
+    },
     
     # scrape indexed urls from irs
     # "start_scraping_irs" : {
@@ -82,6 +77,12 @@ SPIDERS_Q = {
     #     "task": "charity_retry_failed_pages",
     #     "schedule": 25.0,
     # },
+    
+    # index guide star urls
+    # "index_guidestar_url" : {
+    #     "task": "index_guidestar_url",
+    #     "schedule": 30.0,
+    # }   ,
 }
 
 

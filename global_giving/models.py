@@ -12,7 +12,7 @@ class GlobalGivingIndexedUrl(models.Model):
     
 class GlobalGivingNGO(models.Model):
     organization_name = models.CharField(max_length=200, unique=True, primary_key=True)
-    organization_address = models.CharField(max_length=200)
+    organization_address = models.TextField(null=True)
     country = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=200, null=True) 
     cause = models.TextField(null=True)

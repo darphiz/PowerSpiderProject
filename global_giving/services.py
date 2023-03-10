@@ -1,6 +1,6 @@
 import logging
 from contextlib import suppress
-from ngo_scraper.requests import CauseGenerator, CleanData, ImageDownloader, ProxyRequestClient
+from ngo_scraper.requests import CauseGenerator, CleanData, Helper, ImageDownloader, ProxyRequestClient
 from .models import GlobalGivingIndexedUrl
 from bs4 import BeautifulSoup
 from lxml import etree
@@ -18,7 +18,8 @@ class GlobalGivingScraper(
     CauseGenerator, 
     CleanData,
     Notify,
-    ImageDownloader
+    ImageDownloader,
+    Helper
     ):
     def __init__(self, link) -> None:
         self.url = "https://www.globalgiving.org"
@@ -63,8 +64,7 @@ class GlobalGivingScraper(
             logger.error(f"Error getting organization name -> {e}")
             raise e
     
-                 
-    
+
     def _get_org_addr(self, page_soup):
         with suppress(Exception):
             addr_selector = "body > div:nth-child(2) > section.layout_center.org_map.col_defaultBg.layout_rel > div > div > div.grid-0.grid-lg-12.org_info_overlay.layout_abs.layout_abs_leftInner.org_info_overlay_centerVertical.layout_alignLeft.border_default.col_white.box_verticalPadded3.box_horizontalPadded2 > div.box_topPadded2 > div"
@@ -75,18 +75,16 @@ class GlobalGivingScraper(
 
     def _get_country(self, page_soup):
         with suppress(Exception):
-            country_selector = "body > div:nth-child(2) > section.layout_center.org_map.col_defaultBg.layout_rel > div > div > div.grid-0.grid-lg-12.org_info_overlay.layout_abs.layout_abs_leftInner.org_info_overlay_centerVertical.layout_alignLeft.border_default.col_white.box_verticalPadded3.box_horizontalPadded2 > div.box_topPadded2 > div > span:nth-child(6)"
-            country = page_soup.select(country_selector)
-            country = country[0].text
-            return self.clean_text(country).title()
+            if c_span := page_soup.find("span", itemprop="addressCountry"):
+                country = c_span.text
+                return self.clean_country(self.clean_text(country))
         return ""
     
     def _get_state(self, page_soup):
         with suppress(Exception):
-            state_selector = "body > div:nth-child(2) > section.layout_center.org_map.col_defaultBg.layout_rel > div > div > div.grid-0.grid-lg-12.org_info_overlay.layout_abs.layout_abs_leftInner.org_info_overlay_centerVertical.layout_alignLeft.border_default.col_white.box_verticalPadded3.box_horizontalPadded2 > div.box_topPadded2 > div > span:nth-child(3)"
-            state = page_soup.select(state_selector)
-            state = state[0].text
-            return self.clean_text(state).title()
+            if state := page_soup.find("span", itemprop="addressRegion"):
+                state = state.text
+                return self.get_full_region_name(self.clean_text(state)).lower()
         return ""
     
     def _get_causes(self, page_soup):
@@ -163,9 +161,6 @@ class GlobalGivingScraper(
 
         return self.download_images(images, self.image_path, self.data["organization_name"])
         
-        
-        
-    
     
     def scrape(self):
         response = self.query(self.detail_link)
@@ -173,14 +168,14 @@ class GlobalGivingScraper(
             logger.error(f"Error scraping {self.detail_link} -> {response.status_code}")
             return
         page_soup = BeautifulSoup(response.content, "html.parser")
-        self.data["organization_address"] = self._get_org_addr(page_soup)
+        self.data["organization_address"] = self.clean_text(self._get_org_addr(page_soup))
         self.data["country"] = self._get_country(page_soup)
         self.data["state"] = self._get_state(page_soup)
         self.data["cause"] = self._get_causes(page_soup)        
         self.data["email"] = ""
         self.data["phone"] = self._get_phone(page_soup)
         self.data["website"] = self._get_website(page_soup)
-        self.data["mission"] = self._get_mission(page_soup)
+        self.data["mission"] = self.clean_text(self._get_mission(page_soup))
         self.data["govt_reg_number"] = ""
         self.data["govt_reg_number_type"] = ""
         self.data["registration_date_year"] = self._get_reg_year(page_soup)
@@ -199,8 +194,8 @@ class GlobalGivingScraper(
             return
         page_soup = BeautifulSoup(response.content, "html.parser")
         page_tree = etree.HTML(str(page_soup))
-        self.data["organization_name"] = self._get_organization_name(page_tree).title()
-        self.data["description"] = self._get_description(page_soup)
+        self.data["organization_name"] = self.clean_text(self._get_organization_name(page_tree))
+        self.data["description"] = self.clean_text(self._get_description(page_soup))
         self.scrape()
         return self.data
         

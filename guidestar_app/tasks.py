@@ -1,15 +1,21 @@
+import logging
 from celery import shared_task
 from guidestar_app.models import CrawlCursor, GuideStarIndexedUrl, NGO
 from guidestar_app.services import GuideStarIndexer, GuideStarScraper
 from django.db import transaction
-from ngo_scraper.loggers import guide_star_log
 from django.utils.timezone import now
+from django.conf import settings
 
+from ngo_scraper.notification import Notify
+
+
+log = logging.getLogger(__name__)
+HOOK = settings.GUIDESTAR_HOOK
+notification = Notify(HOOK)
 
 
 @shared_task(name="index_guidestar_url")
 def index_guidestar_url():
-    log = guide_star_log()
     cursor = CrawlCursor.objects.get_or_create(app="guidestar", max_cursor=20)[0]
     if  cursor.current_cursor >= cursor.max_cursor:
         cursor.current_cursor = cursor.max_cursor
@@ -27,6 +33,11 @@ def index_guidestar_url():
                 GuideStarIndexedUrl.objects.create(url=link)
         except Exception as e:
             log.error(f"Error saving {link}: {str(e)}")
+            notification.alert(
+                Notify.error(
+                    f"Error saving {link}: \n{str(e)}"
+                )
+            )
             continue
 
     cursor.current_cursor = end
@@ -37,12 +48,11 @@ def index_guidestar_url():
 
 @shared_task(name="scrape_guidestar_data")
 def scrape_guidestar_data(url):
-    log = guide_star_log()
     try:
         spider = GuideStarScraper(url)
         data = spider.scrape()
         with transaction.atomic():
-            NGO.objects.update_or_create(**data)
+            NGO.objects.create(**data)
             GuideStarIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
         log.info(f"SUCCESS: Scraped {url}")
     except Exception as e:
@@ -56,7 +66,17 @@ def scrape_guidestar_data(url):
             pass
         except Exception as e:
             log.error(f"ERROR: {url} - {str(e)}")
+            notification.alert(
+                Notify.error(
+                    f"ERROR: {url}: \n{str(e)}"
+                )
+            )
         log.error(f"ERROR: {url} - {str(e)}")
+        notification.alert(
+                Notify.error(
+                    f"ERROR: {url}: \n{str(e)}"
+                )
+            )
     return
 
 
@@ -66,7 +86,7 @@ def guide_star_orchestration():
     first_ten = GuideStarIndexedUrl.objects.filter(is_scraped=False, 
                                                    locked=False,
                                                    trial__lt=4
-                                                   )[:20]
+                                                   )[:10]
     for url in first_ten:
         scrape_url = url.url
         url.locked = True

@@ -12,7 +12,8 @@ class GlobalGivingIndexedUrlAdmin(admin.ModelAdmin):
     
 
 
-
+class NGOAdmin(admin.ModelAdmin):
+    search_fields = ['organization_name', 'organization_address']
 
 admin.site.register(GlobalGivingIndexedUrl, GlobalGivingIndexedUrlAdmin)
-admin.site.register(GlobalGivingNGO)
+admin.site.register(GlobalGivingNGO, NGOAdmin)
