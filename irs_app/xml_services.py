@@ -1,15 +1,32 @@
+import re
 from contextlib import suppress
 import requests
 import zipfile
 import lxml
 from bs4 import BeautifulSoup
 
-from ngo_scraper.requests import CauseGenerator
-from .models import XML_NGO, XMLUrlIndexer
+from ngo_scraper.requests import CauseGenerator, Helper
+from .models import NGO, XMLUrlIndexer
 from django.db import transaction
 from .utils import us_state_to_abbrev
 import xmltodict
 
+def search_nested_dict(nested_dict, search_keys):
+    result = {}
+    for key, value in nested_dict.items():
+        if key in search_keys:
+            result[key] = value
+            search_keys.remove(key)
+        elif isinstance(value, dict):
+            if sub_result := search_nested_dict(value, search_keys):
+                result |= sub_result
+                search_keys = [k for k in search_keys if k not in sub_result.keys()]
+            if not search_keys:
+                break
+    return result
+
+def reverse_list(string):
+    return re.findall(r'"([^"]*)"', string)
 
 class XMLUrlSpider:
     """
@@ -76,23 +93,42 @@ class XMLUrlSpider:
         
         
         
-class XMLScraper(CauseGenerator):
+class XMLScraper(CauseGenerator, Helper):
     """
     Scrape the XML files and save the data
     """
     def __init__(self, url):
         self.url = url
+        # domain scraped from the url is the last part of the url
+        self.domain = [url.split("/")[-1],]       
+        self.urls_scraped = [] 
+        self.important_keys = ["DescriptionProgramSrvcAccomTxt", "TotalRevenueColumnAmt", "TotalRevenueAmt","PrimaryExemptPurposeTxt"]
+        self.important_data = {}
         return super().__init__()    
-        
-    def _get_org_mission(self, parsed_xml):
+          
+    def _get_important_data(self, parsed_xml):
         with suppress(Exception):
-            org_mission = parsed_xml["Return"]["ReturnData"]["IRS990EZ"]["ProgramSrvcAccomplishmentGrp"]["DescriptionProgramSrvcAccomTxt"]
-            return org_mission.lower()
+            search = search_nested_dict(parsed_xml, self.important_keys)
+            self.important_data = search
+            return search
+        self.important_data = {}
+        return {}
+    
+    def _get_org_mission(self):
+        with suppress(Exception):
+            org_mission_pattern_one = self.important_data.get("DescriptionProgramSrvcAccomTxt", "")
+            pattern_two = self.important_data.get("PrimaryExemptPurposeTxt", "")
+            return (org_mission_pattern_one or pattern_two).lower()
         return ""
      
-    def _get_total_revenue(self, parsed_xml):
+    def _get_total_revenue(self):
         with suppress(Exception):
-            return parsed_xml["Return"]["ReturnData"]["IRS990EZ"]["TotalRevenueAmt"]
+            return self.important_data.get("TotalRevenueColumnAmt", "")
+        return ""
+     
+    def _get_gross_income(self):
+        with suppress(Exception):
+            return self.important_data.get("TotalRevenueAmt", "")
         return ""
      
      
@@ -101,9 +137,9 @@ class XMLScraper(CauseGenerator):
         abbrev_to_us_state = dict(map(reversed, us_state_to_abbrev.items()))
         root = lxml.etree.XML(memorybuffer)
         parsed_xml = xmltodict.parse(memorybuffer)
+        self._get_important_data(parsed_xml)
         ns = {"ns": "http://www.irs.gov/efile"}
-        organization_mission = self._get_org_mission(parsed_xml)
-        total_revenue = self._get_total_revenue(parsed_xml)
+
         
         state = ""
         non_profit_address = ""
@@ -285,19 +321,18 @@ class XMLScraper(CauseGenerator):
             tax_period_end,
             xml_name)
         
-        
         irs_data = {}
         irs_data["organization_name"] = (data[0] or "").lower()
         irs_data["organization_address"] = (data[1] or "").lower()
         irs_data["country"] = (data[2] or "").lower()
         irs_data["state"] = (data[3] or "").lower()
         irs_data["email"] = (data[7] or "").lower()
-        irs_data["mission"] = (organization_mission or "").lower()
+        irs_data["mission"] = (self._get_org_mission() or "").lower()
         irs_data["govt_reg_number"] = (data[15] or "").lower()
         irs_data["govt_reg_number_type"] = "EIN"
-        irs_data["gross_income"] = (total_revenue or "").lower()
-        irs_data["domain"] = self.format_list(["https://irs.gov"])
-        irs_data["urls_scraped"] = self.format_list([self.url])
+        irs_data["gross_income"] = (self._get_total_revenue() or self._get_gross_income()).lower()
+        irs_data["domain"] = self.format_list(self.domain)
+        irs_data["urls_scraped"] = self.format_list(self.urls_scraped)
         return irs_data
         
     def scrape(self):
@@ -315,14 +350,34 @@ class XMLScraper(CauseGenerator):
             for index in range(total):
                 xml_name = xml_list[index]
                 memorybuffer = input_zip.read(xml_name)
+                self.urls_scraped = [xml_name, ]
                 xml_data = self.process_xml_file(xml_name, memorybuffer)
                 if xml_data:
                     try:
                         with transaction.atomic():
-                            XML_NGO.objects.create(**xml_data)    
+                            if not xml_data["organization_name"]:
+                                return
+                            ngo_data, created = NGO.objects.update_or_create(
+                                organization_name=xml_data["organization_name"],
+                                defaults={**xml_data}
+                            ) 
+                            if not created:
+                                last_url = reverse_list(ngo_data.domain)
+                                unique_urls = list(set(last_url + self.domain))
+                                new_domain_string = self.format_list(unique_urls)
+                                ngo_data.domain = new_domain_string
+                                
+                                ## urls scraped
+                                
+                                last_url_scraped = reverse_list(ngo_data.urls_scraped)
+                                unique_urls_scraped = list(set(last_url_scraped + self.urls_scraped))
+                                new_url_scraped_string = self.format_list(unique_urls_scraped)
+                                ngo_data.urls_scraped = new_url_scraped_string
+                                # save
+                                ngo_data.save()
                     except Exception as e:
-                        print(e)                        
-                if index == 200:
+                        print(f"Error while saving {xml_name} {e}")                       
+                if index == 100:
                     break
                 print(f"Processed {index+1} of {total} files")
         return total

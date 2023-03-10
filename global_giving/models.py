@@ -6,6 +6,7 @@ class GlobalGivingIndexedUrl(models.Model):
     locked = models.BooleanField(default=False)
     added_on = models.DateTimeField(auto_now=True)
     scraped_on = models.DateTimeField(null=True)
+    trial = models.IntegerField(default=0)
     def __str__(self) -> str:
         return self.url
     

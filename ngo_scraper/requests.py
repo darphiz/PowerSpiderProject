@@ -1,3 +1,4 @@
+import re
 import uuid
 import json
 from random import choices
@@ -75,7 +76,7 @@ class ProxyRequestClient(Headers):
     def query(self, url):
         if self.session is None:
             self.client()
-        return self.session.get(url, verify=False, timeout=120)
+        return self.session.get(url, verify=False, timeout=300)
     
     def post_data(self, url, data):
         if self.session is None:
@@ -85,7 +86,7 @@ class ProxyRequestClient(Headers):
             url,
             data=data,
             verify=False,
-            timeout=120,
+            timeout=300,
             headers={
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'User-Agent': self.get_random_user_agent(), 
@@ -144,6 +145,9 @@ class CauseGenerator:
             return _set
         except Exception:
             return None
+    def reverse_list(self, string):
+        return re.findall(r'"([^"]*)"', string)
+    
     def generator_get_causes(self, causes:list, sensitivity:int = 40):
         causes_id = [self._get_c_id(cause, sensitivity) for cause in causes]
         return self.format_list(causes_id)
@@ -231,7 +235,7 @@ class ImageDownloader:
             "http": proxy,
             "https": proxy
         }
-        res = requests.get(image_url, stream=True, proxies=proxies,timeout=120)
+        res = requests.get(image_url, stream=True, proxies=proxies,timeout=300)
         if res.status_code != 200:
             raise NoDataError(f"Error downloading {image_url}: BAD RESPONSE")
         with open(file_path, "wb") as f:
@@ -277,3 +281,17 @@ class ImageDownloader:
         images = [self.save_image(image_link, image_path, base_name) for image_link in images_links]
         images = [image for image in images if image]
         return self._format_list(images)
+    
+    
+    
+    
+class Helper:
+    def search_nested_dict(self, nested_dict, search_key):
+        for key, value in nested_dict.items():
+            if key == search_key:
+                return value
+            elif isinstance(value, dict):
+                result = self.search_nested_dict(value, search_key)
+                if result is not None:
+                    return result
+        return None

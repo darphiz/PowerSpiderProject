@@ -20,10 +20,10 @@ SCRAPER_Q = {
     # },
        
     # Scraper to scrape data from global_giving website
-    # "gg_url_crawler": {
-    #     "task": "start_scraping_gg",
-    #     "schedule": 40.0,
-    # }
+    "gg_url_crawler": {
+        "task": "start_scraping_gg",
+        "schedule": 20.0,
+    }
     
     # FCRA scraper
     # "fcr_data_spider": {
@@ -51,10 +51,10 @@ SCRAPER_Q = {
     
     
     # scrape indexed urls from guide star india
-    "start_scraping_ggi" : {
-        "task": "start_scraping_ggi",
-        "schedule": 20.0,
-    }
+    # "start_scraping_ggi" : {
+    #     "task": "start_scraping_ggi",
+    #     "schedule": 20.0,
+    # }
     
     # download xml file from irs
     # "download_xml_file" : {
