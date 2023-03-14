@@ -9,6 +9,7 @@ from fuzzywuzzy import fuzz
 from cleantext import clean
 from retry import retry
 from django.utils.text import slugify
+from django.conf import settings
 
 class NoDataError(Exception):
     pass
@@ -56,19 +57,15 @@ class Headers:
 class ProxyRequestClient(Headers):
     def __init__(self) -> None:
         self.session = None
+        self.proxy = settings.PROXY_URL or None
         return super().__init__()
     
     def client(self):
-        # ZENROW PROXY
-        # proxy = "http://8640be8b81cffba3e7f43a4b4e9eb86326647d6d:custom_headers=true@proxy.zenrows.com:8001"
-        
-        # PROXY 2
-        proxy = "http://swxthcae-rotate:pm8t1rnfa0dc@p.webshare.io:80/"
-        proxies = {"http": proxy, "https": proxy}
-
+        proxies = {"http": self.proxy, "https": self.proxy}
         session = requests.Session()
         headers =  self.get_headers()
-        session.proxies.update(proxies)
+        if self.proxy:
+            session.proxies.update(proxies)
         session.headers.update(headers)
         self.session = session
         return session
@@ -150,6 +147,8 @@ class CauseGenerator:
     
     def generator_get_causes(self, causes:list, sensitivity:int = 40):
         causes_id = [self._get_c_id(cause, sensitivity) for cause in causes]
+        # remove None values
+        causes_id = [x for x in causes_id if x]
         return self.format_list(causes_id)
     
 
@@ -296,7 +295,7 @@ class Helper:
                     return result
         return None
 
-    def get_full_region_name(self, short_name):
+    def get_full_region_name(self, short_name:str) -> str:
         states = {
             'AK': 'Alaska',
             'AL': 'Alabama',

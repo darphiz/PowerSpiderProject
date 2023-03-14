@@ -146,7 +146,7 @@ LOGGING = {
         },
     },
 }
-
+PROXY_URL = environ.get("PROXY_URL", None)
 PLEDGE_HOOK = environ.get("PLEDGE_HOOK", None)
 FRCA_HOOK = environ.get("FRCA_HOOK", None)
 CHARITY_HOOK = environ.get("CHARITY_NAV_HOOK", None)

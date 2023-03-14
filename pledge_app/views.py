@@ -8,6 +8,5 @@ from pledge_app.services import PledgeScraper
 HOOK = settings.PLEDGE_HOOK
 class StatusView(View):
     def get(self, request):
-        data = PledgeScraper("/organizations/82-1776810/ipittythebull-foundation").scrape()
-        
+        data = PledgeScraper("/organizations/75-3100001/wildlife-learning-foundation").scrape()
         return JsonResponse(data, safe=False)

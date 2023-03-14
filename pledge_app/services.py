@@ -1,7 +1,7 @@
 import logging
 from contextlib import suppress
 from ngo_scraper.notification import Notify
-from ngo_scraper.requests import CauseGenerator, CleanData, ImageDownloader, ProxyRequestClient
+from ngo_scraper.requests import CauseGenerator, CleanData, Helper, ImageDownloader, ProxyRequestClient
 from bs4 import BeautifulSoup
 from django.conf import settings
 
@@ -64,7 +64,8 @@ class PledgeScraper(ProxyRequestClient,
                     CauseGenerator,
                     ImageDownloader,
                     CleanData,
-                    Notify
+                    Notify,
+                    Helper
                     ):
     
     def __init__(self, link):
@@ -76,71 +77,6 @@ class PledgeScraper(ProxyRequestClient,
     
     def _patch_url(self):
         return f"{self.url}{self.link}"
-    
-    def _get_full_region_name(self, short_name):
-        with suppress(Exception):
-            states = {
-                'AK': 'Alaska',
-                'AL': 'Alabama',
-                'AR': 'Arkansas',
-                'AS': 'American Samoa',
-                'AZ': 'Arizona',
-                'CA': 'California',
-                'CO': 'Colorado',
-                'CT': 'Connecticut',
-                'DC': 'District of Columbia',
-                'DE': 'Delaware',
-                'FL': 'Florida',
-                'GA': 'Georgia',
-                'GU': 'Guam',
-                'HI': 'Hawaii',
-                'IA': 'Iowa',
-                'ID': 'Idaho',
-                'IL': 'Illinois',
-                'IN': 'Indiana',
-                'KS': 'Kansas',
-                'KY': 'Kentucky',
-                'LA': 'Louisiana',
-                'MA': 'Massachusetts',
-                'MD': 'Maryland',
-                'ME': 'Maine',
-                'MI': 'Michigan',
-                'MN': 'Minnesota',
-                'MO': 'Missouri',
-                'MP': 'Northern Mariana Islands',
-                'MS': 'Mississippi',
-                'MT': 'Montana',
-                'NA': 'National',
-                'NC': 'North Carolina',
-                'ND': 'North Dakota',
-                'NE': 'Nebraska',
-                'NH': 'New Hampshire',
-                'NJ': 'New Jersey',
-                'NM': 'New Mexico',
-                'NV': 'Nevada',
-                'NY': 'New York',
-                'OH': 'Ohio',
-                'OK': 'Oklahoma',
-                'OR': 'Oregon',
-                'PA': 'Pennsylvania',
-                'PR': 'Puerto Rico',
-                'RI': 'Rhode Island',
-                'SC': 'South Carolina',
-                'SD': 'South Dakota',
-                'TN': 'Tennessee',
-                'TX': 'Texas',
-                'UT': 'Utah',
-                'VA': 'Virginia',
-                'VI': 'Virgin Islands',
-                'VT': 'Vermont',
-                'WA': 'Washington',
-                'WI': 'Wisconsin',
-                'WV': 'West Virginia',
-                'WY': 'Wyoming'
-            }
-            state_name = states.get(short_name.upper())
-            return short_name.upper() if state_name is None else state_name
-        return short_name
     
     def _get_org_address(self, page_soup:BeautifulSoup):
         with suppress(Exception):
@@ -203,7 +139,7 @@ class PledgeScraper(ProxyRequestClient,
             return self.clean_text(" ".join([p.text for p in mission_text]))        
         return None
     
-    def _get_causes(self, page_soup:BeautifulSoup):
+    def _get_org_causes(self, page_soup:BeautifulSoup):
         with suppress(Exception):
             mission_div = page_soup.find("div", {"class": "organization-mission"})
             cause_section = mission_div.find_all("section")[1]
@@ -225,9 +161,9 @@ class PledgeScraper(ProxyRequestClient,
             "organization_name": self.clean_text(organization_name),
             "organization_address": full_address,
             "country": self.clean_country(country),
-            "state": self._get_full_region_name(region),
+            "state": self.get_full_region_name(region),
         }
-        data["cause"] = self.generator_get_causes(self._get_causes(page_soup))
+        data["cause"] = self.generator_get_causes(self._get_org_causes(page_soup))
         data["website"] = self._get_website_link(page_soup)
         data["mission"] = self._get_org_mission(page_soup)
         data["image"] = self.download_images(
