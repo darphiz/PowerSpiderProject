@@ -11,10 +11,10 @@ def remove_scraped(_, __, queryset):
 
 
 class XMlURLIndexerAdmin(admin.ModelAdmin):
-    list_display = ('url', 'is_scraped', 'scraped_on', 'locked', 'trial')
+    list_display = ('url', 'is_scraped', 'scraped_on', 'locked', 'trial', 'file_name')
     list_filter = ('is_scraped', 'locked', 'trial', "is_downloaded")
     search_fields = ('url',)
-
+    
 
 class IRSIndexedUrlAdmin(admin.ModelAdmin):
     list_display = ('url', 'is_scraped', 'scraped_on', 'locked', 'trial')

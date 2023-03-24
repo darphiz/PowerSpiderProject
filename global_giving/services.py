@@ -183,8 +183,8 @@ class GlobalGivingScraper(
         self.data["registration_date_day"] = ""
         self.data["gross_income"] = ""
         self.data["image"] = self._scrape_image(page_soup)
-        self.data["domain"] = self.url
-        self.data["urls_scraped"] = self.detail_link
+        self.data["domain"] = self.format_list([self.url,])
+        self.data["urls_scraped"] = self.format_list([self.detail_link,])
     
     def crawl(self):
         link = self._patch_url()

@@ -10,7 +10,7 @@ class IrsView(View):
         """
         # https://apps.irs.gov/pub/epostcard/990/xml/2019/download990xml_2019_8.zip
         # xml_task_orchestrator.delay()
-        url = "https://apps.irs.gov/pub/epostcard/990/xml/2019/download990xml_2019_8.zip"
+        url = "https://apps.irs.gov/pub/epostcard/990/xml/2020/download990xml_2020_8.zip"
         # XMLUrlSpider.download_xml_file(url)
         XMLScraper(url).scrape()
         return HttpResponse("Starts indexing urls")

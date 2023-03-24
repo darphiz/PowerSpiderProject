@@ -13,5 +13,5 @@ clean all queue - redis-cli flushall
 Flower - celery -A ngo_scraper flower --port=5566
 Notify Queue - celery -A ngo_scraper worker -l INFO -Q notify
 report Queue - celery -A ngo_scraper worker -l INFO -Q report
-Default Queue - celery -A ngo_scraper worker -l INFO 
+Default Queue - celery -A ngo_scraper worker -l INFO -n worker_four
 Scheduler - celery -A ngo_scraper beat -l INFO

@@ -16,14 +16,14 @@ SCRAPER_Q = {
     # scrape indexed pledge urls
     # 'start_scraping_pledge': {
     #     'task' : 'start_scraping',
-    #     'schedule' : 25.0,
+    #     'schedule' : 30.0,
     # },
        
     # Scraper to scrape data from global_giving website
-    # "gg_url_crawler": {
-    #     "task": "start_scraping_gg",
-    #     "schedule": 65.0,
-    # }
+    "gg_url_crawler": {
+        "task": "start_scraping_gg",
+        "schedule": 30.0,
+    }
     
     # FCRA scraper
     # "fcr_data_spider": {
@@ -33,10 +33,10 @@ SCRAPER_Q = {
     
     
     # scrape guide star indexed urls
-    "start_scraping_guidestar" : {
-        "task": "start_scraping_guidestar",
-        "schedule": 40.0,
-    },
+    # "start_scraping_guidestar" : {
+    #     "task": "start_scraping_guidestar",
+    #     "schedule": 40.0,
+    # },
     
     # scrape indexed urls from irs
     # "start_scraping_irs" : {

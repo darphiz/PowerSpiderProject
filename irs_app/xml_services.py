@@ -102,34 +102,49 @@ class XMLScraper(CauseGenerator, Helper):
         # domain scraped from the url is the last part of the url
         self.domain = [url.split("/")[-1],]       
         self.urls_scraped = [] 
-        self.important_keys = ["DescriptionProgramSrvcAccomTxt", "TotalRevenueColumnAmt", "TotalRevenueAmt","PrimaryExemptPurposeTxt"]
-        self.important_data = {}
+        self.parsed = {}
         return super().__init__()    
           
     def _get_important_data(self, parsed_xml):
         with suppress(Exception):
-            search = search_nested_dict(parsed_xml, self.important_keys)
-            self.important_data = search
-            return search
-        self.important_data = {}
+            self.parsed = parsed_xml
         return {}
+    
+    def _get_mission_one(self):
+        with suppress(Exception):
+            dict_val = search_nested_dict(self.parsed, ["ActivityOrMissionDesc"])
+            if is_present := dict_val.get("ActivityOrMissionDesc", None):
+                return is_present.lower()
+        return None
+    
+    def _get_mission_two(self):
+        with suppress(Exception):
+            dict_val = search_nested_dict(self.parsed, ["PrimaryExemptPurposeTxt"])
+            if is_present := dict_val.get("PrimaryExemptPurposeTxt", None):
+                return is_present.lower()
+        return None
+    
     
     def _get_org_mission(self):
         with suppress(Exception):
-            org_mission_pattern_one = self.important_data.get("DescriptionProgramSrvcAccomTxt", "")
-            pattern_two = self.important_data.get("PrimaryExemptPurposeTxt", "")
+            org_mission_pattern_one = self._get_mission_one()
+            pattern_two = self._get_mission_two()
             return (org_mission_pattern_one or pattern_two).lower()
-        return ""
+        return None
      
     def _get_total_revenue(self):
         with suppress(Exception):
-            return self.important_data.get("TotalRevenueColumnAmt", "")
-        return ""
+            dict_val = search_nested_dict(self.parsed, ["TotalRevenueGrp"])
+            if is_present := dict_val.get("TotalRevenueGrp", None):
+                return is_present.get("TotalRevenueColumnAmt", None)
+        return None
      
     def _get_gross_income(self):
         with suppress(Exception):
-            return self.important_data.get("TotalRevenueAmt", "")
-        return ""
+            dict_val = search_nested_dict(self.parsed, ["ReturnData"])
+            if is_present := dict_val.get("ReturnData", None):
+                return is_present.get("TotalRevenueAmt", None)
+        return None
      
      
     def process_xml_file(self, xml_name, memorybuffer):
@@ -330,7 +345,7 @@ class XMLScraper(CauseGenerator, Helper):
         irs_data["mission"] = (self._get_org_mission() or "").lower()
         irs_data["govt_reg_number"] = (data[15] or "").lower()
         irs_data["govt_reg_number_type"] = "EIN"
-        irs_data["gross_income"] = (self._get_total_revenue() or self._get_gross_income()).lower()
+        irs_data["gross_income"] = self._get_total_revenue() or self._get_gross_income()
         irs_data["domain"] = self.format_list(self.domain)
         irs_data["urls_scraped"] = self.format_list(self.urls_scraped)
         return irs_data
@@ -377,7 +392,7 @@ class XMLScraper(CauseGenerator, Helper):
                                 ngo_data.save()
                     except Exception as e:
                         print(f"Error while saving {xml_name} {e}")                       
-                if index == 100:
+                if index == 200:
                     break
                 print(f"Processed {index+1} of {total} files")
         return total
