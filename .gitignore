@@ -11,3 +11,5 @@ TODO
 /__pycache__
 /__pycache__/
 .env
+initial_data.json
+data.json

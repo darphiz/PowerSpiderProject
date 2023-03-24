@@ -66,7 +66,7 @@ class XMLUrlSpider:
         return [url.url for url in XMLUrlIndexer.objects.all()]
 
     @staticmethod
-    def download_xml_file(url):
+    def download_xml_file(url:str):
         try:
             url_obj = XMLUrlIndexer.objects.get(url=url)
         except XMLUrlIndexer.DoesNotExist:
@@ -349,7 +349,13 @@ class XMLScraper(CauseGenerator, Helper):
         irs_data["domain"] = self.format_list(self.domain)
         irs_data["urls_scraped"] = self.format_list(self.urls_scraped)
         return irs_data
-        
+    
+    def remove_empty_keys(self, data):
+        for key in list(data.keys()):
+            if not data[key]:
+                del data[key]
+        return data
+                
     def scrape(self):
         try:
             url_obj = XMLUrlIndexer.objects.get(url=self.url)
@@ -368,6 +374,7 @@ class XMLScraper(CauseGenerator, Helper):
                 self.urls_scraped = [xml_name, ]
                 xml_data = self.process_xml_file(xml_name, memorybuffer)
                 if xml_data:
+                    xml_data = self.remove_empty_keys(xml_data)
                     try:
                         with transaction.atomic():
                             if not xml_data["organization_name"]:
@@ -392,8 +399,6 @@ class XMLScraper(CauseGenerator, Helper):
                                 ngo_data.save()
                     except Exception as e:
                         print(f"Error while saving {xml_name} {e}")                       
-                if index == 200:
-                    break
                 print(f"Processed {index+1} of {total} files")
         return total
     
