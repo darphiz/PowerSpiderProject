@@ -2,7 +2,7 @@ import logging
 from celery import shared_task
 from guidestar_app.models import CrawlCursor, GuideStarIndexedUrl, NGO
 from guidestar_app.services import GuideStarIndexer, GuideStarScraper
-from django.db import transaction
+from django.db import transaction, IntegrityError
 from django.utils.timezone import now
 from django.conf import settings
 
@@ -47,14 +47,22 @@ def index_guidestar_url():
 
 
 @shared_task(name="scrape_guidestar_data")
-def scrape_guidestar_data(url):
+def scrape_guidestar_data(url, init_data=None):
     try:
-        spider = GuideStarScraper(url)
+        spider = GuideStarScraper(url, initial_data=init_data)
         data = spider.scrape()
-        with transaction.atomic():
-            NGO.objects.create(**data)
+        if not data:
+            log.error(f"ERROR: {url} - No data found")
             GuideStarIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
+            return
+        NGO.objects.create(**data)
+        GuideStarIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
         log.info(f"SUCCESS: Scraped {url}")
+    except IntegrityError as e:
+        log.error(f"ERROR: {url} - {str(e)}")
+        GuideStarIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
+        return
+    
     except Exception as e:
         try:
             indexed_url = GuideStarIndexedUrl.objects.get(url=url)
@@ -86,10 +94,15 @@ def guide_star_orchestration():
     first_ten = GuideStarIndexedUrl.objects.filter(is_scraped=False, 
                                                    locked=False,
                                                    trial__lt=6
-                                                   )[:50]
+                                                   )[:20]
     for url in first_ten:
         scrape_url = url.url
         url.locked = True
         url.save()
-        scrape_guidestar_data.delay(url=scrape_url)
+        data = {
+            "organization_name": url.organization_name,
+            "govt_reg_number": url.govt_reg_number,
+            "state": url.state
+        }
+        scrape_guidestar_data.delay(url=scrape_url, init_data=data)
     return

@@ -6,7 +6,7 @@ from guidestar_app.services import GuideStarScraper
 
 class GuideStarView(View):
     def get(self, request):
-        spider = GuideStarScraper("/profile/41-2145557")
+        spider = GuideStarScraper("/profile/38-3722092", initial_data={"organization_name": "Test"})
         print(spider.scrape())
         return HttpResponse("Hello World")
 

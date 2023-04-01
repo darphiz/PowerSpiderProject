@@ -78,7 +78,7 @@ class GuideStarScraper(
     """
     This will scrape all indexed url
     """
-    def __init__(self, url) -> None:
+    def __init__(self, url:str, initial_data:dict = {}) -> None:
         self.url = url
         if not self.url:
             raise GuideStarException("url cannot be empty")
@@ -90,11 +90,12 @@ class GuideStarScraper(
         self.organization_name = ""
         self.image_path = "images/guidestar/"
         self.webhook_url = HOOK
+        self.initial_data = initial_data
         return super().__init__()
     
     def login(self):
-        username = "daramolaafeez123@gmail.com"
-        password = "@65#!H3Fq@bcvLe"
+        username = settings.GUIDESTAR_USERNAME
+        password = settings.GUIDESTAR_PASSWORD
         url = "https://www.guidestar.org/Account/LoginToMainsite?Length=7"
         
         with suppress(Exception):
@@ -136,13 +137,35 @@ class GuideStarScraper(
     def is_email(self, email_addr):
         return re.match(r"[^@]+@[^@]+\.[^@]+", email_addr)
     
-    def _get_organization_name(self, soup):
+    def _get_org_one(self, soup):
         with suppress(Exception):
             selector = "#profileHeader > div.col-lg-9 > h1"
             if organization_name := soup.select_one(selector):
-                self.organization_name = self.clean_text(organization_name.text)
-                return self.clean_text(organization_name.text)
-        raise GuideStarException("No organization name")
+                org_name = self.clean_text(organization_name.text) 
+                if not org_name:
+                    raise GuideStarException("No organization name")
+                self.organization_name = org_name
+                return org_name
+        return None
+    
+    def _get_org_two(self, soup):
+        with suppress(Exception):
+            org_name_h = soup.find("h1", class_="profile-org-name")
+            if org_name_h:
+                org_name = self.clean_text(org_name_h.text)
+                if not org_name:
+                    raise GuideStarException("No organization name")
+                self.organization_name = org_name
+                return org_name
+        return None
+    
+    def _get_organization_name(self, soup):
+        org_name = self._get_org_one(soup) or self._get_org_two(soup)
+        if not org_name:
+            raise GuideStarException("No organization name")
+        self.organization_name = org_name
+        return org_name
+        
     
     def _get_organization_address(self, soup):
         merged_address = ""
@@ -268,7 +291,7 @@ class GuideStarScraper(
                 link = f"{self.base_url}{src}"
                 link = [link, ]
                 return self.download_images(
-                    link, self.image_path, base_name=self.organization_name
+                    link, self.image_path, base_name=self.organization_name.strip()
                 )
         except Exception:
             log.error(f"Error getting image for {self.organization_name} , {self.endpoint}")
@@ -276,24 +299,28 @@ class GuideStarScraper(
     
     
     def scrape(self):
-        self.login()
+        # self.login()
         response = self.query(self.endpoint)
         if response.status_code != 200:
-            raise GuideStarException(f"Error scraping {self.endpoint} - {response.status_code}")
+            log.error(f"Error scraping {self.endpoint} - {response.status_code}")
+            return {}
         soup = BeautifulSoup(response.text, "html.parser")
+        if self.initial_data.get("organization_name", None):
+            self.organization_name = self.initial_data.get("organization_name", None)
+        
         data = {
-            "organization_name": self._get_organization_name(soup),
+            "organization_name": self.initial_data.get("organization_name", None) or self._get_organization_name(soup),
         }
         
         data ["organization_address"] = self._get_organization_address(soup)
         data["country"] = self.clean_text(self._get_country())
-        data["state"] = self.clean_text(self._get_state())
+        data["state"] = self.initial_data.get("state", None) or self.clean_text(self._get_state())
         data["cause"] = self.clean_text(self._get_cause(soup))
         data["email"] = self._get_email(soup)
         data["phone"] = self.clean_phone(self._get_phone(soup))
         data["website"] = self.clean_link(self._get_website(soup))
         data["mission"] = self.clean_text(self._get_mission(soup))
-        data["govt_reg_number"] = self.clean_number(self._get_government_number(soup)).replace("-", "")
+        data["govt_reg_number"] = self.initial_data.get("govt_reg_number", None) or self.clean_number(self._get_government_number(soup)).replace("-", "")
         data["govt_reg_number_type"] = "EIN" if data.get("govt_reg_number") else None
         data["registration_date_year"] = self.clean_number(self._get_reg_date_year(soup))
         data["image"] = self._get_image(soup)

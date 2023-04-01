@@ -3,6 +3,7 @@ import uuid
 import json
 from random import choices
 from fake_useragent import UserAgent
+import tls_client
 import requests
 import urllib3
 from fuzzywuzzy import fuzz
@@ -62,7 +63,13 @@ class ProxyRequestClient(Headers):
     
     def client(self):
         proxies = {"http": self.proxy, "https": self.proxy}
-        session = requests.Session()
+        session = tls_client.Session(
+            client_identifier="chrome_103",
+            h2_settings={
+                "HEADER_TABLE_SIZE": 65536,
+                "MAX_CONCURRENT_STREAMS": 5000,
+            },
+        )
         headers =  self.get_headers()
         if self.proxy:
             session.proxies.update(proxies)
@@ -73,7 +80,10 @@ class ProxyRequestClient(Headers):
     def query(self, url):
         if self.session is None:
             self.client()
-        return self.session.get(url, verify=False, timeout=300)
+        return self.session.get(url, 
+                                # verify=False,
+                                timeout_seconds=300
+                                )
     
     def post_data(self, url, data):
         if self.session is None:
@@ -82,8 +92,8 @@ class ProxyRequestClient(Headers):
         return self.session.post(
             url,
             data=data,
-            verify=False,
-            timeout=300,
+            # verify=False,
+            timeout_seconds=300,
             headers={
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'User-Agent': self.get_random_user_agent(), 
@@ -96,9 +106,9 @@ class ProxyRequestClient(Headers):
             self.client()
         return self.session.post(
             url,
-            verify=False,
+            # verify=False,
             json=json,
-            timeout=300,
+            timeout_seconds =300,
         )
     
     def decode_email(self, encodedString):

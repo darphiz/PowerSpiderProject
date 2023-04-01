@@ -33,16 +33,16 @@ SCRAPER_Q = {
     
     
     # scrape guide star indexed urls
-    # "start_scraping_guidestar" : {
-    #     "task": "start_scraping_guidestar",
-    #     "schedule": 40.0,
-    # },
+    "start_scraping_guidestar" : {
+        "task": "start_scraping_guidestar",
+        "schedule": 22.0,
+    },
     
     # scrape indexed urls from irs
-    "start_scraping_irs" : {
-        "task": "start_scraping_irs",
-        "schedule": 13.0,
-    },
+    # "start_scraping_irs" : {
+    #     "task": "start_scraping_irs",
+    #     "schedule": 13.0,
+    # },
     
     
     # scrape indexed urls from guide star india

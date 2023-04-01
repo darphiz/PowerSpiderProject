@@ -8,6 +8,11 @@ class GuideStarIndexedUrl (models.Model):
     added_on = models.DateTimeField(auto_now=True)
     scraped_on = models.DateTimeField(null=True)
     trial = models.IntegerField(default=0)
+    organization_name = models.CharField(max_length=200, null=True)
+    govt_reg_number = models.CharField(max_length=200, null=True)   
+    govt_reg_number_type = models.CharField(max_length=200, null=True)
+    state = models.CharField(max_length=200, null=True)
+    
     def __str__(self):
         return self.url
     
@@ -32,8 +37,8 @@ class SessionTracker(models.Model):
     created = models.DateTimeField(auto_now=True)
 
 class NGO(models.Model):
-    organization_name = models.CharField(max_length=200, unique=True)
-    organization_address = models.CharField(max_length=200)
+    organization_name = models.CharField(max_length=200)
+    organization_address = models.TextField(null=True)
     country = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=200, null=True) 
     cause = models.TextField(null=True)
@@ -42,7 +47,7 @@ class NGO(models.Model):
     website = models.CharField(max_length=200, null=True)
     mission =  models.TextField(null=True)
     description = models.TextField(null=True)
-    govt_reg_number = models.CharField(max_length=200, null=True)
+    govt_reg_number = models.CharField(max_length=200, null=True, unique=True)
     govt_reg_number_type = models.CharField(max_length=200, null=True)
     registration_date_year = models.CharField(max_length=200, null=True)
     registration_date_month = models.CharField(max_length=200, null=True)
@@ -54,3 +59,14 @@ class NGO(models.Model):
 
     def __str__(self) -> str:
         return self.organization_name
+    
+    
+class ErrorPage(models.Model):
+    page = models.CharField(max_length=200, null=False)
+    state = models.CharField(max_length=200, null=False)
+    
+class LastPage(models.Model):
+    page = models.IntegerField(default=1)
+    state = models.CharField(max_length=200, null=False)
+    
+    

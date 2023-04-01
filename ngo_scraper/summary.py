@@ -36,7 +36,7 @@ class SummaryView(View):
         guide_star = {
             "total": GuideStar_NGO.objects.count(),
             "Name": "GuideStar App",
-            "status": "Suspended"
+            "status": "Running"
         }
 
         global_giving = {
