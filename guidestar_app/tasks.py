@@ -93,8 +93,8 @@ def scrape_guidestar_data(url, init_data=None):
 def guide_star_orchestration():
     first_ten = GuideStarIndexedUrl.objects.filter(is_scraped=False, 
                                                    locked=False,
-                                                   trial__lt=6
-                                                   )[:20]
+                                                   trial__lt=8
+                                                   )[:40]
     for url in first_ten:
         scrape_url = url.url
         url.locked = True
