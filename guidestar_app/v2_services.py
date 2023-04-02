@@ -43,14 +43,12 @@ class GGRequest:
     def gg_get(self, url, params=None):
         return self.session.get(url, 
                                 params=params, 
-                                # verify=False, 
                                 timeout_seconds=200
                             )
     
     def gg_post(self, url, data=None):
         return self.session.post(url, 
                                  data=data, 
-                                #  verify=False, 
                                  timeout_seconds=200
                             )
     
@@ -75,7 +73,7 @@ class IndexGGUrls(GGRequest, Notify):
                 }
         response = self.gg_post(self.endpoint, data=data)
         if response.status_code != 200:
-            self.alert(f"Error in crawling {self.state} page {self.page} \n Reason: \n{response.text}")
+            self.alert(f"Error in crawling {self.state} page {self.page} \n Reason: \n{response.status_code}")
             logger.error(f"Error in crawling {self.state} page {self.page}")
             return None
         
@@ -101,7 +99,3 @@ class IndexGGUrls(GGRequest, Notify):
             self.alert(f"Error in crawling {self.state} page {self.page} \n Reason: \n{str(e)}")
             logger.error(f"Error in crawling {self.state} page {self.page} \n Reason: \n{str(e)}")
             return None
-        
-if __name__ == '__main__':
-    urls = IndexGGUrls('New Jersey', 400).scrape()
-    print(urls)

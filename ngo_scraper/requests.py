@@ -63,13 +63,7 @@ class ProxyRequestClient(Headers):
     
     def client(self):
         proxies = {"http": self.proxy, "https": self.proxy}
-        session = tls_client.Session(
-            client_identifier="chrome_103",
-            h2_settings={
-                "HEADER_TABLE_SIZE": 65536,
-                "MAX_CONCURRENT_STREAMS": 5000,
-            },
-        )
+        session = requests.Session()
         headers =  self.get_headers()
         if self.proxy:
             session.proxies.update(proxies)
@@ -81,8 +75,8 @@ class ProxyRequestClient(Headers):
         if self.session is None:
             self.client()
         return self.session.get(url, 
-                                # verify=False,
-                                timeout_seconds=300
+                                verify=False,
+                                timeout=300
                                 )
     
     def post_data(self, url, data):
@@ -92,8 +86,8 @@ class ProxyRequestClient(Headers):
         return self.session.post(
             url,
             data=data,
-            # verify=False,
-            timeout_seconds=300,
+            verify=False,
+            timeout=300,
             headers={
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'User-Agent': self.get_random_user_agent(), 
@@ -106,9 +100,9 @@ class ProxyRequestClient(Headers):
             self.client()
         return self.session.post(
             url,
-            # verify=False,
+            verify=False,
             json=json,
-            timeout_seconds =300,
+            timeout=300,
         )
     
     def decode_email(self, encodedString):

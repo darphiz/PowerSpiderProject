@@ -35,7 +35,7 @@ SCRAPER_Q = {
     # scrape guide star indexed urls
     "start_scraping_guidestar" : {
         "task": "start_scraping_guidestar",
-        "schedule": 15.0,
+        "schedule": 18.0,
     },
     
     # scrape indexed urls from irs

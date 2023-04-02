@@ -30,7 +30,7 @@ def start_indexing(state, max_cursor = 400):
         
         last_cursor.page = page
         last_cursor.save()
-        sleep_time = randint(20, 30) 
+        sleep_time = randint(10, 25) 
         print(f"Sleeping for {sleep_time} seconds")
         sleep(sleep_time)
     
@@ -40,7 +40,57 @@ def start_indexing(state, max_cursor = 400):
     
     
 def index_many_states():
-    states = ["Alabama", "Arkansas", "American Samoa", "Arizona", "California"]
+    states = [  
+                'Delaware',
+                'Florida',
+                'Georgia',
+                'Guam',
+                'Hawaii',
+                'District of Columbia',
+                'Iowa',
+                'Idaho',
+                'Illinois',
+                'Indiana',
+                'Kansas',
+                'Kentucky',
+                'Louisiana',
+                'Massachusetts',
+                'Maryland',
+                'Maine',
+                'Michigan',
+                'Minnesota',
+                'Missouri',
+                'Northern Mariana Islands',
+                'Mississippi',
+                'Montana',
+                'National',
+                'North Carolina',
+                'North Dakota',
+                'Nebraska',
+                'New Hampshire',
+                'New Jersey',
+                'New Mexico',
+                'Nevada',
+                'New York',
+                'Ohio',
+                'Oklahoma',
+                'Oregon',
+                'Pennsylvania',
+                'Puerto Rico',
+                'Rhode Island',
+                'South Carolina',
+                'South Dakota',
+                'Tennessee',
+                'Texas',
+                'Utah',
+                'Virginia',
+                'Virgin Islands',
+                'Vermont',
+                'Washington',
+                'Wisconsin',
+                'West Virginia',
+                'Wyoming'
+              ]
     for state in states:
         start_indexing(state)
         sleep_time = randint(300, 600)
