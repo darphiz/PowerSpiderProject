@@ -8,8 +8,6 @@ from ngo_scraper.notification import Notify
 from django.conf import settings
 from .models import GuideStarIndiaIndexedUrl
 
-
-
 logger = logging.getLogger(__name__)
 
 HOOK = settings.GGI_HOOK
@@ -202,23 +200,19 @@ class GG_India_Scraper(
          
     def _get_images(self, soup):
         image_selector = "#SectionPlaceHolder1_ctl01_duLogo > div > div:nth-child(3) > img"
-        try:
+        with contextlib.suppress(Exception):
             link = soup.select_one(image_selector).get("src")
             link = f"{self.domain}{link}"
             links = [link, ]
             return self.download_images(
                         links, self.image_path, base_name=self.organization_name
                     )
-        except Exception as e:
-            logger.error(f"GG_India_Scraper: {e}")
-            self.alert(Notify.error(f"Image Error \n{e}"))
-            return None
-
+        return None
      
     def scrape(self):
         response = self.query(self.url)
         profile_response = self.query(self.profile_url)
-        finance_response = self.query(self.finance_url)
+        finance_response = self.query(self.finance_url)        
         if response.status_code != 200 or profile_response.status_code != 200 or finance_response.status_code != 200:
             logger.error(f"GG_India_Scraper: {response.status_code}, {profile_response.status_code}")
             self.alert(Notify.error(f"Crawl Error \nSummary Response: {response.status_code} \nProfile Response: {profile_response.status_code} \nFinance Response: {finance_response.status_code}"))

@@ -1,0 +1,39 @@
+[Unit]
+Description=Celery Service
+After=redis.service
+
+[Service]
+Type=forking
+User=scraper1
+Group=scraper1
+EnvironmentFile=/home/scraper1/Desktop/NGO_PROJECT/.env
+Environment=/home/scraper1/Desktop/NGO_PROJECT/env/bin
+WorkingDirectory=/home/scraper1/Desktop/NGO_PROJECT
+ExecStart=/bin/bash -c 'source /home/scraper1/Desktop/NGO_PROJECT/env/bin/activate && for i in {1..15}; do nohup celery -A ngo_scraper worker -l INFO -n worker_$i --pidfile=/var/run/celery/%n.$i.pid  & done'
+ExecStop=/bin/bash -c 'killall -g -TERM -q celery'
+Restart=always
+RestartSec=10
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

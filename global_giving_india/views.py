@@ -9,7 +9,7 @@ from global_giving_india.services import GG_India_Scraper
 class GGIndiaView(View):
     def get(self, request):
         "DO NOT RUN THIS CODE; FOR DEMO PURPOSES ONLY"
-        spider = GG_India_Scraper("https://guidestarindia.org/Summary.aspx?CCReg=3554")
+        spider = GG_India_Scraper("https://guidestarindia.org/Summary.aspx?CCReg=1519")
         data = spider.scrape()
         return JsonResponse(
             data, safe=False

@@ -11,8 +11,8 @@ class GuideStarIndiaIndexedUrl(models.Model):
         return self.url
     
 class NGO(models.Model):
-    organization_name = models.CharField(max_length=200, unique=True)
-    organization_address = models.CharField(max_length=200)
+    organization_name = models.CharField(max_length=200)
+    organization_address = models.TextField(null=True)
     country = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=200, null=True) 
     cause = models.TextField(null=True)
@@ -30,6 +30,9 @@ class NGO(models.Model):
     image = models.TextField(max_length=200, null=True)
     domain = models.CharField(max_length=200, null=True)
     urls_scraped =  models.TextField(null=True)
+
+    class Meta:
+        unique_together = ('govt_reg_number', 'govt_reg_number_type',)
 
     def __str__(self) -> str:
         return self.organization_name

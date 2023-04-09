@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GlobalGivingIndexedUrl, GlobalGivingNGO
+from .models import GlobalGivingIndexedUrl, GlobalGivingNGO, NGO
 
 def unScrape(modeladmin, request, queryset):
     queryset.update(is_scraped=False, locked=False, trial=0)
@@ -15,5 +15,11 @@ class GlobalGivingIndexedUrlAdmin(admin.ModelAdmin):
 class NGOAdmin(admin.ModelAdmin):
     search_fields = ['organization_name', 'organization_address']
 
+
+class NGOAdminV2(admin.ModelAdmin):
+    search_fields = ['organization_name', 'organization_address']
+
+
 admin.site.register(GlobalGivingIndexedUrl, GlobalGivingIndexedUrlAdmin)
 admin.site.register(GlobalGivingNGO, NGOAdmin)
+admin.site.register(NGO, NGOAdminV2)

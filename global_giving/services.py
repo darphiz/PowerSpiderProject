@@ -212,11 +212,10 @@ class GlobalGivingScraper(
         if not self.data["organization_name"]:
             logger.error(f"Error crawling {link} -> organization name not found")
             return
-        if not self.detail_link:
-            self.data["domain"] = self.format_list([self.url,])
-            self.data["urls_scraped"] = self.format_list([link,])
-            return self.data
-
-        self.scrape()
+        
+        self.data["domain"] = self.format_list([self.url,])
+        self.data["urls_scraped"] = self.format_list([link,])
+        with suppress(Exception):
+            self.scrape()
         return self.data
         

@@ -15,19 +15,21 @@ class NoDataError(Exception):
     pass
 
 class PledgeListCrawler(ProxyRequestClient, Notify):
-    def __init__(self, start=1, end=5, cause="animals"):
+    def __init__(self, start=1, end=5, **kwargs):
         self.start = start
         self.end = end
-        self.cause = cause
+        self.cause = kwargs.get("cause", "")
         self.url = "https://www.pledge.to/organizations"
         self.links = []
+        self.state = kwargs.get("state", "")
+        self.country = kwargs.get("country", "")
         self.webhook_url = HOOK
         return super().__init__()
         
     def crawl_urls(self):
         urls = []
         for i in range(self.start, self.end+1):
-            url = f"{self.url}?page={str(i)}&cause={self.cause}"
+            url = f"{self.url}?page={str(i)}&cause={self.cause}&state={self.state}&country={self.country}"
             urls.append(url)
         return urls
 
@@ -52,13 +54,28 @@ class PledgeListCrawler(ProxyRequestClient, Notify):
         return
         
     def crawl_all(self):
-        self.alert(Notify.info(f"Crawling {self.cause} pledges.to from page {self.start} to page {self.end}"))
+        # self.alert(Notify.info(f"Crawling {self.cause} pledges.to from page {self.start} to page {self.end}"))
         urls = self.crawl_urls()
         for url in urls:
             self.crawl(url)
         return self.links
 
-
+    def get_max_result(self):
+        try:
+            url = f"{self.url}?page=1&cause={self.cause}&state={self.state}&country={self.country}"
+            response = self.query(url)
+            if response.status_code != 200:
+                logger.error(f"Error getting Max result {url}: BAD RESPONSE")
+                return 30
+            page_soup = BeautifulSoup(response.text, "html.parser")
+            page_size_selector = "body > div.container-fluid > div > div.col-lg-8.px-lg-4 > div > p > b:nth-child(2)"
+            max_result = page_soup.select_one(page_size_selector).text
+            # remove comma from number
+            max_result = max_result.replace(",", "")
+            return int(max_result)    
+        except Exception as e:
+            logger.error(f"Error getting Max result {url}: {str(e)}")
+            return 30
 
 class PledgeScraper(ProxyRequestClient, 
                     CauseGenerator,

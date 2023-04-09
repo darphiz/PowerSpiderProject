@@ -9,14 +9,17 @@ from django.conf import settings
 
 logger = logging.getLogger(__name__)
 HOOK = settings.CHARITY_HOOK
+
+
 class CharityNavigatorScraper(
     ProxyRequestClient, 
     CauseGenerator, 
     CleanData,
     Notify):
    
-    def __init__(self, page) -> None:
+    def __init__(self, page:int = 1, max_result:int=10) -> None:
         self.page = page
+        self.max_result = max_result
         self.base_url = "https://graph.charitynavigator.org/graphql" 
         self.c_url = "https://www.charitynavigator.org/ein/" 
         self.scraped_data = []
@@ -134,8 +137,8 @@ class CharityNavigatorScraper(
         self.scraped_data.append(ngo_data)
         return
 
-    def crawl(self):
-        payload = q_builder(page = self.page, result_size=5)
+    def crawl(self, payload: dict = None):
+        payload = payload if payload else q_builder(page = self.page, result_size=self.max_result)
         response = self.post_json(self.base_url, json=payload)
         if response.status_code != 200:
             return self._log_error()
@@ -148,6 +151,17 @@ class CharityNavigatorScraper(
             self.extract_data(d)
         return self.scraped_data
 
+
+    def get_max_result(self, payload:dict):
+        try:
+            response = self.post_json(self.base_url, json=payload)
+            if response.status_code != 200:
+                return self._log_error()
+            response = response.json()    
+            return response.get("data").get("publicSearchFaceted").get("result_count")
+        except Exception:
+            logger.error(f"Error getting max result")
+            return 1000
 
     def _log_error(self):
         logger.error(f"Error in crawling page {self.page}")

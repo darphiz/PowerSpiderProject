@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GuideStarIndexedUrl, CrawlCursor, NGO
+from .models import GuideStarIndexedUrl, CrawlCursor, NGO,LastPage, ErrorPage
 
 def remove_scraped(modeladmin, request, queryset):
     queryset.update(is_scraped=False, locked=False, trial=0)
@@ -18,3 +18,5 @@ class URLIndexAdmin(admin.ModelAdmin):
 admin.site.register(GuideStarIndexedUrl, URLIndexAdmin)
 admin.site.register(CrawlCursor)
 admin.site.register(NGO, NGOAdmin)
+admin.site.register(LastPage)
+admin.site.register(ErrorPage)

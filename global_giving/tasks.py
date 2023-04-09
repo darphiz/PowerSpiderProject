@@ -1,8 +1,8 @@
 import logging
 from celery import shared_task
 from .services import GlobalGivingScraper
-from .models import GlobalGivingNGO, GlobalGivingIndexedUrl
-from django.db import transaction, IntegrityError
+from .models import NGO, GlobalGivingIndexedUrl
+from django.db import IntegrityError
 from django.conf import settings
 from ngo_scraper.notification import Notify
 from django.db.models import F
@@ -29,10 +29,7 @@ def scrape_global_giving(url):
                 )
             logger.info(f"ERROR: No data found for {url}")
             return
-        with transaction.atomic():
-            GlobalGivingNGO.objects.update_or_create(
-                organization_name=data["organization_name"],
-                defaults={**data})
+        NGO.objects.create(**data)
         GlobalGivingIndexedUrl.objects.filter(url=url).update(is_scraped=True)
         logger.info(f"SUCCESS: Scraped {url}")
             
@@ -65,7 +62,7 @@ def task_orchestrator():
         first_twenty = GlobalGivingIndexedUrl.objects.filter(
                 is_scraped=False, 
                 locked=False,
-                trial__lte=10
+                trial__lte=4
                 )[:30]
         for url in first_twenty:
             scrape_url = url.url

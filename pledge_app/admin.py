@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PledgeIndexedUrl, CrawlCursor, NGO,Cause
+from .models import PledgeIndexedUrl, CrawlCursor, NGO,Cause, LastPage
 
 
 
@@ -18,7 +18,7 @@ class IndexUrlAdmin(admin.ModelAdmin):
 
 admin.site.register(CrawlCursor)
 admin.site.register(PledgeIndexedUrl, IndexUrlAdmin)
-
+admin.site.register(LastPage)
 
 
     

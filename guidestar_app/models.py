@@ -60,13 +60,17 @@ class NGO(models.Model):
     def __str__(self) -> str:
         return self.organization_name
     
+    class Meta:
+        ordering = ['organization_name', 'state']
     
 class ErrorPage(models.Model):
     page = models.CharField(max_length=200, null=False)
     state = models.CharField(max_length=200, null=False)
+    city = models.CharField(max_length=200, null=True)
+    
     
 class LastPage(models.Model):
     page = models.IntegerField(default=1)
     state = models.CharField(max_length=200, null=False)
-    
+    city = models.CharField(max_length=200, null=True)
     

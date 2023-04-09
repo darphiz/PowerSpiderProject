@@ -1,7 +1,7 @@
 import logging
 from celery import shared_task
 from global_giving_india.services import GG_India_Scraper
-from django.db import transaction, IntegrityError
+from django.db import IntegrityError
 from .models import GuideStarIndiaIndexedUrl, NGO
 from django.utils.timezone import now
 from ngo_scraper.notification import Notify
@@ -17,9 +17,9 @@ def scrape_ggi_data(url):
         notification = Notify(HOOK)
         spider = GG_India_Scraper(url)
         data = spider.scrape()
-        with transaction.atomic():
-            NGO.objects.update_or_create(**data)
-            GuideStarIndiaIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
+        # with transaction.atomic():
+        NGO.objects.create(**data)
+        GuideStarIndiaIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
         logger.info(f"SUCCESS: Scraped {url}")
     # except duplicate key error
     except IntegrityError as e:
@@ -56,8 +56,8 @@ def ggi_orchestration():
     notification = Notify(HOOK)
     first_ten = GuideStarIndiaIndexedUrl.objects.filter(is_scraped=False, 
                                                    locked=False,
-                                                   trial__lt=6
-                                                   )[:30]
+                                                   trial__lt=5
+                                                   )[:10]
     
     if first_ten.count() == 0:
         notification.alert(

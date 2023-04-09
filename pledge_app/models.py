@@ -28,7 +28,7 @@ class CrawlCursor(models.Model):
 
 
 class NGO(models.Model):
-    organization_name = models.CharField(max_length=200, unique=True)
+    organization_name = models.CharField(max_length=200)
     organization_address = models.CharField(max_length=200)
     country = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=200, null=True) 
@@ -51,8 +51,20 @@ class NGO(models.Model):
     def __str__(self) -> str:
         return self.organization_name
     
-    
+    class Meta:
+        unique_together = ('organization_name', 'state')
+        ordering = ['organization_name', 'state']
 class Cause(models.Model):
     cause = models.CharField(max_length=200, unique=True, default="education")
+    def __str__(self) -> str:
+        return self.cause
+    
+    
+    
+class LastPage(models.Model):
+    page = models.IntegerField(default=0)
+    cause = models.CharField(max_length=200)
+    state = models.CharField(max_length=200, null=True)
+    
     def __str__(self) -> str:
         return self.cause

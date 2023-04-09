@@ -13,24 +13,24 @@ class SummaryView(View):
         irs_xml = {
             "total": NGO_V2.objects.count(),
             "Name": "IRS XML",
-            "status": "Done"
+            "status": "Approved"
         } 
         irs_zip = {
             "total": ZIP_NGO.objects.count(),
             "Name": "IRS ZIP",
-            "status": "Done"
+            "status": "Approved"
         }
         
         pledge = {
             "total": Pledge_NGO.objects.count(),
             "Name": "Pledge App",
-            "status": "Suspended"
+            "status": "Running"
         }
         
         fcra_app = {
             "total": FCR_NGO.objects.count(),
             "Name": "FCRA App",
-            "status": "Done"
+            "status": "Approved"
         }
         
         guide_star = {
@@ -42,19 +42,19 @@ class SummaryView(View):
         global_giving = {
             "total": GlobalGivingNGO.objects.count(),
             "Name": "Global Giving",
-            "status": "Suspended"
+            "status": "Approved"
         }
         
         gg_india = {
             "total": GGIndiaNGO.objects.count(),
             "Name": "Guidestar India",
-            "status": "Done"
+            "status": "Running"
         }
         
         c_nav = {
             "total": CNavNGO.objects.count(),
             "Name": "Charity Navigator",
-            "status": "Suspended"
+            "status": "Running"
         }
         
         
@@ -62,7 +62,7 @@ class SummaryView(View):
         data = [pledge, c_nav, guide_star, global_giving, irs_xml, irs_zip,fcra_app,gg_india]
         
         total = sum([i["total"] for i in data])
-        expected = 5000000
+        expected = 4500000
         
         percentage = int((total/expected)*100)
         

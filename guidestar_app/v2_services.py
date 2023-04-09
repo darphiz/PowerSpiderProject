@@ -14,21 +14,18 @@ urllib3.disable_warnings()
 
 class GGRequest:
     def __init__(self):
-        self.session = tls_client.Session(
-            client_identifier="chrome_103",
-            h2_settings={
-                "HEADER_TABLE_SIZE": 65536,
-                "MAX_CONCURRENT_STREAMS": 5000,
-            },
-        )
-        # self.proxy = settings.PROXY_URL or None
+        self.session = tls_client.Session(client_identifier="chrome_103")
         self.proxy = settings.PROXY_URL or None
         self.session.headers.update(
             {
-                'User-Agent': UserAgent().random,
+                "accept": "application/json, */*;q=0.8",
+                "accept-encoding": "gzip, deflate",
+                "accept-language": "en-US,en;q=0.9",
+                'user-agent': UserAgent().random,
                 'origin': 'https://www.guidestar.org',
                 'referer': 'https://www.guidestar.org/search',
                 'x-requested-with': 'XMLHttpRequest',
+                "connection": "keep-alive"
             }
         )
         # add proxies
@@ -55,34 +52,52 @@ class GGRequest:
     
     
 class IndexGGUrls(GGRequest, Notify):
-    def __init__(self, state, page=1):
+    def __init__(self, state, page=1, city=""):
         self.endpoint = 'https://www.guidestar.org/search/SubmitSearch'
         self.state = state
         self.page = page
+        self.city = city
         self.webhook_url = settings.GUIDESTAR_HOOK or None
+        self.max_results = 400
         return super().__init__()
     
     
-    def crawl(self):
+    def crawl(self, use_v2:bool=False):
         # generate cookies
-        self.gg_get('https://www.guidestar.org/')
-        data = {
+        v1_data = {
                 'State': self.state, 
                 'CurrentPage': self.page,
                 'SearchType': 'org',
                 }
+        
+        v2_data = {
+                    "CurrentPage": self.page,
+                    "SearchType": "org",
+                    "State": self.state,
+                    "PeopleZipRadius": "Zip Only",
+                    "PeopleRevenueRangeLow": "$0",
+                    "PeopleRevenueRangeHigh": "max",
+                    "PeopleAssetsRangeLow": "$0",
+                    "PeopleAssetsRangeHigh": "max",
+                    "PCSSubjectPeople": "",
+                    "CityNav": self.city,
+                    "SelectedCityNav[]": self.city
+        }
+        
+        data = v2_data if use_v2 else v1_data
         response = self.gg_post(self.endpoint, data=data)
         if response.status_code != 200:
             self.alert(f"Error in crawling {self.state} page {self.page} \n Reason: \n{response.status_code}")
             logger.error(f"Error in crawling {self.state} page {self.page}")
-            return None
+            raise Exception(f"Error in crawling {self.state} page {self.page}")
         
         all_urls = response.json() 
+        self.max_results = all_urls['TotalHits']
         return all_urls['Hits']
 
-    def scrape(self):
+    def scrape(self, use_v2:bool=False):
         try:
-            all_ngo = self.crawl()
+            all_ngo = self.crawl(use_v2=use_v2)
             if all_ngo is None:
                 return None
             all_ngo_data = []
@@ -98,4 +113,11 @@ class IndexGGUrls(GGRequest, Notify):
         except Exception as e:
             self.alert(f"Error in crawling {self.state} page {self.page} \n Reason: \n{str(e)}")
             logger.error(f"Error in crawling {self.state} page {self.page} \n Reason: \n{str(e)}")
-            return None
+            raise e
+
+
+    def get_max_page(self, use_v2:bool=False):
+        all_ngo = self.crawl(use_v2=use_v2)
+        if all_ngo is None:
+            return 400
+        return self.max_results // 25 + 1

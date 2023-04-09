@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CrawlCursor, NGO, FailedPages
+from .models import CrawlCursor, NGO, FailedPages, LastPage
 # Register your models here.
 
 class CrawlCursorAdmin(admin.ModelAdmin):
@@ -13,3 +13,4 @@ class NGOAdmin(admin.ModelAdmin):
 admin.site.register(CrawlCursor, CrawlCursorAdmin)
 admin.site.register(NGO, NGOAdmin)
 admin.site.register(FailedPages)
+admin.site.register(LastPage)
