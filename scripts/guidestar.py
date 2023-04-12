@@ -153,15 +153,40 @@ def get_cities(state_abbr):
     return cities
 
 
+def error_indexer(city, state, page):
+    if not page:
+        return True
+    data = IndexGGUrls(state, page, city=city).scrape(use_v2=bool(city))
+    if not data:
+        print("No data found. Skipping")
+        return True
+    # save data
+    print(f"Saving {len(data)} urls for {state} page {page}")
+    unique_counter = 0
+    for ngo_data in data:
+        try:
+            GuideStarIndexedUrl.objects.create(**ngo_data)
+            unique_counter += 1
+        except IntegrityError:
+            print(f"Duplicate url found: {ngo_data['url']}")
+        except Exception as e:
+            print(f"Error saving {ngo_data['url']}: {str(e)}")
+    print(f"Found {unique_counter} unique url(s)")
+    print(f"Finished indexing {state} page {page}")
+    sleep_time = randint(1,3)
+    print(f"Sleeping for {sleep_time} seconds")
+    sleep(sleep_time)
+    return 
+
 
 def re_crawl():
     for error in ErrorPage.objects.all():
-        start_indexing(
-            error.state, 
-            city=error.city or "", 
-            no_cursor=True
-        )
-        error.delete()
+        try:
+            error_indexer(error.city, error.state, error.page)
+            error.delete()
+        except Exception as e:
+            print(f"Error re-indexing {error.state} page {error.page}: {str(e)}")
+        
 
 
 

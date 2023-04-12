@@ -10,6 +10,19 @@ from django.conf import settings
 logger = logging.getLogger(__name__)
 HOOK = settings.CHARITY_HOOK
 
+def is_int_or_float(s):
+    """
+    Returns True if the string is an int or a float.
+    """
+    try:
+        float(s)
+        return True
+    except ValueError:
+        return False
+    except Exception:
+        return False
+    
+    
 
 class CharityNavigatorScraper(
     ProxyRequestClient, 
@@ -80,6 +93,14 @@ class CharityNavigatorScraper(
             else:
                 return None    
         return None
+     
+     
+    def _gross_income(self, soup):
+        gross_income = self._get_gross_income(soup)
+        if gross_income:
+            if is_int_or_float(gross_income):
+                return gross_income
+        return None
             
     def _get_org_website_from_soup(self, soup):
         with suppress(Exception):
@@ -105,7 +126,7 @@ class CharityNavigatorScraper(
         soup = BeautifulSoup(res.text, "html.parser")
         organization_mission = self._parse_mission(self._get_org_mission(soup)).strip()  
         registration_year = self._get_registration_year(soup)
-        gross_income = self.clean_number(self._get_gross_income(soup))
+        gross_income = self.clean_number(self._gross_income(soup))
         org_addr = self._generate_org_address(soup) or self._generate_org_address_2(data)
         website = data.get("website").lower() if data.get("website") else self._get_org_website_from_soup(soup)
         return organization_mission, registration_year, gross_income, org_addr, website    
@@ -138,7 +159,7 @@ class CharityNavigatorScraper(
         return
 
     def crawl(self, payload: dict = None):
-        payload = payload if payload else q_builder(page = self.page, result_size=self.max_result)
+        # payload = payload if payload else q_builder(page = self.page, result_size=self.max_result)
         response = self.post_json(self.base_url, json=payload)
         if response.status_code != 200:
             return self._log_error()

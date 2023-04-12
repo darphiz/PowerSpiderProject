@@ -104,9 +104,10 @@ def index_pledge_link(sub_causes_only:bool=False):
     # print(f"Starting from {last_state} page {last_page} on {last_causes}")
     
     if sub_causes_only:
-        states = ["", ]
+        # states = ["", ]
         causes = sub_causes
     
+    causes = ["", ]
     for state in states:
         for cause in causes:
             print(f"Indexing {state} on {cause}")
@@ -131,7 +132,7 @@ def index_pledge_link(sub_causes_only:bool=False):
                 # last_cursor.page = stop
                 # last_cursor.save()
                 
-                sleep_time = randint(3, 6)
+                sleep_time = randint(1, 3)
                 print(f"Sleeping for {sleep_time} seconds")
                 sleep(sleep_time)
                 
@@ -142,8 +143,8 @@ def index_pledge_link(sub_causes_only:bool=False):
 
 #matches
 # pure cause done
-# pure sub cause started
-# pure state
-# pure country
-# pure sub cause and state
+# pure sub cause done
+# pure state done
+# pure country done
+# pure sub cause and state done
 # country and cause done

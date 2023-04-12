@@ -10,7 +10,7 @@ CHARITY_HOOK = settings.CHARITY_HOOK
 
 
 notification = Notify(CHARITY_HOOK)
-result_size = 10
+result_size = 20
 
 def q_builder(cause:str, state:str, result_size:int = result_size, page:int = 1):
     return {

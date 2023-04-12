@@ -1,0 +1,16 @@
+# State STARTED
+# Cause STARTED
+# Beacon STARTED
+# Ratings STARTED
+# State, Cause          DONE
+# State, Beacon
+# State, Ratings
+# Cause, Beacon
+# Cause, Ratings
+# Beacon, Ratings
+# State, Cause, Beacon
+# State, Cause, Ratings
+# State, Beacon, Ratings
+# Cause, Beacon, Ratings
+# State, Cause, Beacon, Ratings
+

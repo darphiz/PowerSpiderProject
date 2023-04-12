@@ -1,0 +1,3560 @@
+{
+    "getCauseHierarchy": [
+      {
+        "name": "Arts and culture",
+        "children": [
+          {
+            "name": "Arts services",
+            "children": [
+              {
+                "name": "Arts councils",
+                "children": []
+              },
+              {
+                "name": "Artist's services",
+                "children": []
+              },
+              {
+                "name": "Arts administration",
+                "children": []
+              },
+              {
+                "name": "Arts exchange",
+                "children": []
+              },
+              {
+                "name": "Arts education",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Folk arts",
+            "children": []
+          },
+          {
+            "name": "Public arts",
+            "children": []
+          },
+          {
+            "name": "Cultural awareness",
+            "children": [
+              {
+                "name": "Sacred sites",
+                "children": []
+              },
+              {
+                "name": "Traditional knowledge",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Visual arts",
+            "children": [
+              {
+                "name": "Architecture",
+                "children": []
+              },
+              {
+                "name": "Art conservation",
+                "children": []
+              },
+              {
+                "name": "Ceramic arts",
+                "children": []
+              },
+              {
+                "name": "Design",
+                "children": []
+              },
+              {
+                "name": "Drawing",
+                "children": []
+              },
+              {
+                "name": "Painting",
+                "children": []
+              },
+              {
+                "name": "Photography",
+                "children": []
+              },
+              {
+                "name": "Printmaking",
+                "children": []
+              },
+              {
+                "name": "Sculpture",
+                "children": []
+              },
+              {
+                "name": "Textile arts",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Performing arts",
+            "children": [
+              {
+                "name": "Dance",
+                "children": [
+                  {
+                    "name": "Ballet",
+                    "children": []
+                  },
+                  {
+                    "name": "Choreography",
+                    "children": []
+                  },
+                  {
+                    "name": "Folk and ethnic dance",
+                    "children": []
+                  },
+                  {
+                    "name": "Jazz and tap dance",
+                    "children": []
+                  },
+                  {
+                    "name": "Modern dance",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Theater",
+                "children": [
+                  {
+                    "name": "Musical theater",
+                    "children": []
+                  },
+                  {
+                    "name": "Playwriting",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Music",
+                "children": [
+                  {
+                    "name": "Composition",
+                    "children": []
+                  },
+                  {
+                    "name": "Folk and indigenous music",
+                    "children": []
+                  },
+                  {
+                    "name": "Musical ensembles and groups",
+                    "children": []
+                  },
+                  {
+                    "name": "Opera",
+                    "children": []
+                  },
+                  {
+                    "name": "Orchestral music",
+                    "children": []
+                  },
+                  {
+                    "name": "Vocal music",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Performance art",
+                "children": []
+              },
+              {
+                "name": "Circus arts",
+                "children": []
+              },
+              {
+                "name": "Spoken word",
+                "children": []
+              },
+              {
+                "name": "Performing arts education",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Museums",
+            "children": [
+              {
+                "name": "Art museums",
+                "children": []
+              },
+              {
+                "name": "Children's museums",
+                "children": []
+              },
+              {
+                "name": "Ethnic museums",
+                "children": []
+              },
+              {
+                "name": "History museums",
+                "children": []
+              },
+              {
+                "name": "Maritime museums",
+                "children": []
+              },
+              {
+                "name": "Natural history museums",
+                "children": []
+              },
+              {
+                "name": "Planetariums",
+                "children": []
+              },
+              {
+                "name": "Science museums",
+                "children": []
+              },
+              {
+                "name": "Sport and hobby museums",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Humanities",
+            "children": [
+              {
+                "name": "Art history",
+                "children": []
+              },
+              {
+                "name": "History",
+                "children": []
+              },
+              {
+                "name": "Languages",
+                "children": []
+              },
+              {
+                "name": "Linguistics",
+                "children": []
+              },
+              {
+                "name": "Literature and writing",
+                "children": []
+              },
+              {
+                "name": "Philosophy",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Historical activities",
+            "children": [
+              {
+                "name": "Commemorations",
+                "children": []
+              },
+              {
+                "name": "Genealogy",
+                "children": []
+              },
+              {
+                "name": "Historic preservation",
+                "children": []
+              },
+              {
+                "name": "War memorials",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Education",
+        "children": [
+          {
+            "name": "Equal opportunity in education",
+            "children": []
+          },
+          {
+            "name": "Educational management",
+            "children": []
+          },
+          {
+            "name": "Elementary and secondary education",
+            "children": [
+              {
+                "name": "Elementary education",
+                "children": []
+              },
+              {
+                "name": "Middle school education",
+                "children": []
+              },
+              {
+                "name": "Secondary education",
+                "children": []
+              },
+              {
+                "name": "Bilingual education",
+                "children": []
+              },
+              {
+                "name": "Charter school education",
+                "children": []
+              },
+              {
+                "name": "Gifted education",
+                "children": []
+              },
+              {
+                "name": "Special needs education",
+                "children": []
+              },
+              {
+                "name": "Child educational development",
+                "children": []
+              },
+              {
+                "name": "STEM education",
+                "children": []
+              },
+              {
+                "name": "Multicultural education",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Vocational education",
+            "children": [
+              {
+                "name": "Vocational secondary education",
+                "children": []
+              },
+              {
+                "name": "Vocational post-secondary education",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Higher education",
+            "children": [
+              {
+                "name": "Community college education",
+                "children": []
+              },
+              {
+                "name": "Undergraduate education",
+                "children": []
+              },
+              {
+                "name": "University education",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Graduate and professional education",
+            "children": [
+              {
+                "name": "Business education",
+                "children": []
+              },
+              {
+                "name": "Law education",
+                "children": []
+              },
+              {
+                "name": "Medical education",
+                "children": []
+              },
+              {
+                "name": "Social work education",
+                "children": []
+              },
+              {
+                "name": "Teacher education",
+                "children": []
+              },
+              {
+                "name": "Nursing education",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Adult education",
+            "children": [
+              {
+                "name": "Basic and remedial instruction",
+                "children": [
+                  {
+                    "name": "Adult literacy",
+                    "children": []
+                  },
+                  {
+                    "name": "High school equivalency",
+                    "children": []
+                  },
+                  {
+                    "name": "Adult numeracy",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Continuing education",
+                "children": []
+              },
+              {
+                "name": "ESL and second language acquisition",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Student services",
+            "children": [
+              {
+                "name": "Alumni relations",
+                "children": []
+              },
+              {
+                "name": "Sororities and fraternities",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Education services",
+            "children": [
+              {
+                "name": "Out-of-school learning",
+                "children": []
+              },
+              {
+                "name": "College preparation",
+                "children": []
+              },
+              {
+                "name": "Computer literacy",
+                "children": []
+              },
+              {
+                "name": "Cooperative education",
+                "children": []
+              },
+              {
+                "name": "Student retention",
+                "children": []
+              },
+              {
+                "name": "Educational exchanges",
+                "children": []
+              },
+              {
+                "name": "Educational testing",
+                "children": []
+              },
+              {
+                "name": "E-learning",
+                "children": []
+              },
+              {
+                "name": "Educational software",
+                "children": []
+              },
+              {
+                "name": "Parent-teacher involvement",
+                "children": []
+              },
+              {
+                "name": "Reading promotion",
+                "children": []
+              },
+              {
+                "name": "Tutoring",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Early childhood education",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Environment",
+        "children": [
+          {
+            "name": "Environmental justice",
+            "children": []
+          },
+          {
+            "name": "Climate change",
+            "children": []
+          },
+          {
+            "name": "Natural resources",
+            "children": [
+              {
+                "name": "Air quality",
+                "children": []
+              },
+              {
+                "name": "Solid waste management",
+                "children": [
+                  {
+                    "name": "Recycling",
+                    "children": []
+                  },
+                  {
+                    "name": "Composting",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Hazardous waste management",
+                "children": [
+                  {
+                    "name": "Toxic substance control",
+                    "children": []
+                  },
+                  {
+                    "name": "Radiation control",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Water resources",
+                "children": [
+                  {
+                    "name": "Coral reefs",
+                    "children": []
+                  },
+                  {
+                    "name": "Groundwater",
+                    "children": []
+                  },
+                  {
+                    "name": "Oceans and coastal waters",
+                    "children": []
+                  },
+                  {
+                    "name": "Rivers and lakes",
+                    "children": []
+                  },
+                  {
+                    "name": "Water conservation",
+                    "children": []
+                  },
+                  {
+                    "name": "Wetlands",
+                    "children": []
+                  },
+                  {
+                    "name": "Water pollution",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Land resources",
+                "children": [
+                  {
+                    "name": "Deserts",
+                    "children": []
+                  },
+                  {
+                    "name": "Grasslands",
+                    "children": []
+                  },
+                  {
+                    "name": "Highlands",
+                    "children": []
+                  },
+                  {
+                    "name": "Land degradation",
+                    "children": []
+                  },
+                  {
+                    "name": "Tundra",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Energy resources",
+                "children": [
+                  {
+                    "name": "Energy efficiency",
+                    "children": []
+                  },
+                  {
+                    "name": "Fossil fuels",
+                    "children": []
+                  },
+                  {
+                    "name": "Nuclear energy",
+                    "children": []
+                  },
+                  {
+                    "name": "Renewable energy",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Biodiversity",
+            "children": [
+              {
+                "name": "Wildlife biodiversity",
+                "children": [
+                  {
+                    "name": "Aquariums",
+                    "children": []
+                  },
+                  {
+                    "name": "Aquatic wildlife protection",
+                    "children": []
+                  },
+                  {
+                    "name": "Bird preservation",
+                    "children": []
+                  },
+                  {
+                    "name": "Endangered species protection",
+                    "children": []
+                  },
+                  {
+                    "name": "Wildlife rehabilitation",
+                    "children": []
+                  },
+                  {
+                    "name": "Wildlife sanctuaries",
+                    "children": []
+                  },
+                  {
+                    "name": "Zoos",
+                    "children": []
+                  },
+                  {
+                    "name": "Invasive animal species",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Plant biodiversity",
+                "children": [
+                  {
+                    "name": "Botanical gardens",
+                    "children": []
+                  },
+                  {
+                    "name": "Invasive plant species",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Forest preservation",
+                "children": [
+                  {
+                    "name": "Reforestation",
+                    "children": []
+                  },
+                  {
+                    "name": "Forest management",
+                    "children": []
+                  },
+                  {
+                    "name": "Rainforests",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Domesticated animals",
+            "children": [
+              {
+                "name": "Animal welfare",
+                "children": [
+                  {
+                    "name": "Animal adoptions",
+                    "children": []
+                  },
+                  {
+                    "name": "Animal population control",
+                    "children": []
+                  },
+                  {
+                    "name": "Animal rescue and rehabilitation",
+                    "children": []
+                  },
+                  {
+                    "name": "Humane education",
+                    "children": []
+                  },
+                  {
+                    "name": "Research on animals",
+                    "children": []
+                  },
+                  {
+                    "name": "Vegetarianism",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Animal training",
+                "children": []
+              },
+              {
+                "name": "Veterinary medicine",
+                "children": []
+              },
+              {
+                "name": "Human-animal interactions",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Environmental education",
+            "children": [
+              {
+                "name": "Environmental studies",
+                "children": []
+              },
+              {
+                "name": "Nature education",
+                "children": []
+              },
+              {
+                "name": "Outdoor education",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Philanthropy",
+        "children": [
+          {
+            "name": "Philanthropy and public policy",
+            "children": []
+          },
+          {
+            "name": "Foundations",
+            "children": []
+          },
+          {
+            "name": "Nonprofits",
+            "children": []
+          },
+          {
+            "name": "Voluntarism",
+            "children": []
+          },
+          {
+            "name": "Venture philanthropy",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Health",
+        "children": [
+          {
+            "name": "Health care quality",
+            "children": []
+          },
+          {
+            "name": "Health care access",
+            "children": []
+          },
+          {
+            "name": "Health care administration and financing",
+            "children": [
+              {
+                "name": "Bioethics",
+                "children": []
+              },
+              {
+                "name": "Electronic health records",
+                "children": []
+              },
+              {
+                "name": "Health care financing",
+                "children": []
+              },
+              {
+                "name": "Health care management",
+                "children": []
+              },
+              {
+                "name": "Health insurance",
+                "children": []
+              },
+              {
+                "name": "Managed care",
+                "children": []
+              },
+              {
+                "name": "Patient-centered care",
+                "children": []
+              },
+              {
+                "name": "Patient social services",
+                "children": []
+              },
+              {
+                "name": "Patients' rights",
+                "children": []
+              },
+              {
+                "name": "Medical counseling",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "In-patient medical care",
+            "children": [
+              {
+                "name": "Burn care",
+                "children": []
+              },
+              {
+                "name": "Community health care",
+                "children": []
+              },
+              {
+                "name": "Convalescent care",
+                "children": []
+              },
+              {
+                "name": "Hospital care",
+                "children": [
+                  {
+                    "name": "Emergency care",
+                    "children": []
+                  },
+                  {
+                    "name": "Intensive care",
+                    "children": []
+                  },
+                  {
+                    "name": "Specialty hospital care",
+                    "children": []
+                  },
+                  {
+                    "name": "Children's hospital care",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Out-patient medical care",
+            "children": [
+              {
+                "name": "Health care clinics",
+                "children": []
+              },
+              {
+                "name": "Dental care",
+                "children": []
+              },
+              {
+                "name": "Hearing care",
+                "children": []
+              },
+              {
+                "name": "Vision care",
+                "children": []
+              },
+              {
+                "name": "E-health",
+                "children": []
+              },
+              {
+                "name": "School-based health care",
+                "children": []
+              },
+              {
+                "name": "Urgent care",
+                "children": []
+              },
+              {
+                "name": "Preventive care",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Nursing care",
+            "children": [
+              {
+                "name": "Home health care",
+                "children": []
+              },
+              {
+                "name": "Hospice care",
+                "children": []
+              },
+              {
+                "name": "Palliative care",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Reproductive health care",
+            "children": [
+              {
+                "name": "Family planning",
+                "children": []
+              },
+              {
+                "name": "Abortion",
+                "children": []
+              },
+              {
+                "name": "Childbirth",
+                "children": []
+              },
+              {
+                "name": "Maternal and perinatal health",
+                "children": [
+                  {
+                    "name": "Prenatal care",
+                    "children": []
+                  },
+                  {
+                    "name": "Infant care",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Youth pregnancy prevention",
+                "children": []
+              },
+              {
+                "name": "Sexual education",
+                "children": [
+                  {
+                    "name": "Comprehensive sex education",
+                    "children": []
+                  },
+                  {
+                    "name": "Abstinence-only sex education",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Rehabilitation",
+            "children": [
+              {
+                "name": "Animal therapy",
+                "children": []
+              },
+              {
+                "name": "Art and music therapy",
+                "children": []
+              },
+              {
+                "name": "Physical therapy",
+                "children": []
+              },
+              {
+                "name": "Play therapy",
+                "children": []
+              },
+              {
+                "name": "Speech and hearing rehabilitation",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Traditional medicine and healing",
+            "children": []
+          },
+          {
+            "name": "Holistic medicine",
+            "children": []
+          },
+          {
+            "name": "Medical support services",
+            "children": [
+              {
+                "name": "Blood banks",
+                "children": []
+              },
+              {
+                "name": "Emergency medical services",
+                "children": []
+              },
+              {
+                "name": "Home medical equipment",
+                "children": []
+              },
+              {
+                "name": "Organ and tissue banks",
+                "children": []
+              },
+              {
+                "name": "Pharmacies",
+                "children": []
+              },
+              {
+                "name": "Prosthetics",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Mental health care",
+            "children": [
+              {
+                "name": "Psychiatric care",
+                "children": []
+              },
+              {
+                "name": "Community mental health care",
+                "children": []
+              },
+              {
+                "name": "Residential mental health care",
+                "children": []
+              },
+              {
+                "name": "Transitional mental health services",
+                "children": []
+              },
+              {
+                "name": "Addiction services",
+                "children": [
+                  {
+                    "name": "Eating disorders",
+                    "children": []
+                  },
+                  {
+                    "name": "Smoking",
+                    "children": []
+                  },
+                  {
+                    "name": "Substance abuse prevention",
+                    "children": []
+                  },
+                  {
+                    "name": "Substance abuse treatment",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Crisis intervention",
+                "children": [
+                  {
+                    "name": "Suicide crisis intervention",
+                    "children": []
+                  },
+                  {
+                    "name": "Sexual assault victim services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Mental health counseling",
+                "children": [
+                  {
+                    "name": "Support groups",
+                    "children": []
+                  },
+                  {
+                    "name": "Bereavement counseling",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Public health",
+            "children": [
+              {
+                "name": "Communicable disease control",
+                "children": []
+              },
+              {
+                "name": "Environmental health",
+                "children": []
+              },
+              {
+                "name": "Epidemiology",
+                "children": []
+              },
+              {
+                "name": "Occupational health",
+                "children": []
+              },
+              {
+                "name": "Sexually transmitted disease control",
+                "children": []
+              },
+              {
+                "name": "Physical fitness",
+                "children": [
+                  {
+                    "name": "Exercise",
+                    "children": []
+                  },
+                  {
+                    "name": "Nutrition",
+                    "children": []
+                  },
+                  {
+                    "name": "Obesity",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Water access, sanitation and hygiene",
+                "children": [
+                  {
+                    "name": "Clean water supply",
+                    "children": []
+                  },
+                  {
+                    "name": "Sanitation",
+                    "children": []
+                  },
+                  {
+                    "name": "Hygiene",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Medical specialties",
+            "children": [
+              {
+                "name": "Biomedicine",
+                "children": []
+              },
+              {
+                "name": "Cardiology",
+                "children": []
+              },
+              {
+                "name": "Dermatology",
+                "children": []
+              },
+              {
+                "name": "Diagnostic imaging",
+                "children": []
+              },
+              {
+                "name": "Gastroenterology",
+                "children": []
+              },
+              {
+                "name": "Genetics",
+                "children": []
+              },
+              {
+                "name": "Geriatrics",
+                "children": []
+              },
+              {
+                "name": "Hematology",
+                "children": []
+              },
+              {
+                "name": "Immunology",
+                "children": []
+              },
+              {
+                "name": "Internal medicine",
+                "children": []
+              },
+              {
+                "name": "Neurology",
+                "children": []
+              },
+              {
+                "name": "Obstetrics and gynecology",
+                "children": []
+              },
+              {
+                "name": "Oncology",
+                "children": []
+              },
+              {
+                "name": "Ophthalmology",
+                "children": []
+              },
+              {
+                "name": "Orthopedics",
+                "children": []
+              },
+              {
+                "name": "Pathology",
+                "children": []
+              },
+              {
+                "name": "Pediatrics",
+                "children": []
+              },
+              {
+                "name": "Pharmacology",
+                "children": []
+              },
+              {
+                "name": "Psychiatry",
+                "children": []
+              },
+              {
+                "name": "Stem cell therapy",
+                "children": []
+              },
+              {
+                "name": "Surgery",
+                "children": [
+                  {
+                    "name": "Reconstructive surgery",
+                    "children": []
+                  },
+                  {
+                    "name": "Organ transplantation",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Urology",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Diseases and conditions",
+            "children": [
+              {
+                "name": "Musculoskeletal diseases",
+                "children": [
+                  {
+                    "name": "Arthritis",
+                    "children": []
+                  },
+                  {
+                    "name": "Muscular dystrophy",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Brain and nervous system disorders",
+                "children": [
+                  {
+                    "name": "Alzheimer's disease and other forms of dementia",
+                    "children": []
+                  },
+                  {
+                    "name": "ALS",
+                    "children": []
+                  },
+                  {
+                    "name": "Autism",
+                    "children": []
+                  },
+                  {
+                    "name": "Cerebral palsy",
+                    "children": []
+                  },
+                  {
+                    "name": "Epilepsy",
+                    "children": []
+                  },
+                  {
+                    "name": "Multiple sclerosis",
+                    "children": []
+                  },
+                  {
+                    "name": "Spinal cord injuries and diseases",
+                    "children": []
+                  },
+                  {
+                    "name": "Parkinson's disease",
+                    "children": []
+                  },
+                  {
+                    "name": "Meningitis",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Digestive system  diseases",
+                "children": [
+                  {
+                    "name": "Celiac disease",
+                    "children": []
+                  },
+                  {
+                    "name": "Crohn's disease and colitis",
+                    "children": []
+                  },
+                  {
+                    "name": "Irritable bowel syndrome",
+                    "children": []
+                  },
+                  {
+                    "name": "Liver diseases",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Ear, nose and throat diseases",
+                "children": []
+              },
+              {
+                "name": "Eye diseases",
+                "children": []
+              },
+              {
+                "name": "Endocrine, nutritional and metabolic diseases",
+                "children": [
+                  {
+                    "name": "Diabetes",
+                    "children": []
+                  },
+                  {
+                    "name": "Malnutrition",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Heart and circulatory system diseases",
+                "children": []
+              },
+              {
+                "name": "Immune system diseases",
+                "children": [
+                  {
+                    "name": "HIV/AIDS",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Kidney diseases",
+                "children": []
+              },
+              {
+                "name": "Infectious and parasitic diseases",
+                "children": [
+                  {
+                    "name": "Malaria",
+                    "children": []
+                  },
+                  {
+                    "name": "Tuberculosis",
+                    "children": []
+                  },
+                  {
+                    "name": "Ebola",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Mental and behavioral disorders",
+                "children": [
+                  {
+                    "name": "Alcoholism",
+                    "children": []
+                  },
+                  {
+                    "name": "Depression",
+                    "children": []
+                  },
+                  {
+                    "name": "Learning disorders",
+                    "children": []
+                  },
+                  {
+                    "name": "Stress",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Respiratory system diseases",
+                "children": [
+                  {
+                    "name": "Asthma",
+                    "children": []
+                  },
+                  {
+                    "name": "Chronic obstructive pulmonary disease",
+                    "children": []
+                  },
+                  {
+                    "name": "Pneumoconiosis",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Skin conditions",
+                "children": []
+              },
+              {
+                "name": "Genetic conditions and birth defects",
+                "children": [
+                  {
+                    "name": "Cystic fibrosis",
+                    "children": []
+                  },
+                  {
+                    "name": "Down syndrome",
+                    "children": []
+                  },
+                  {
+                    "name": "Hemophilia",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Cancers",
+                "children": [
+                  {
+                    "name": "Breast cancer",
+                    "children": []
+                  },
+                  {
+                    "name": "Leukemia",
+                    "children": []
+                  },
+                  {
+                    "name": "Pancreatic cancer",
+                    "children": []
+                  },
+                  {
+                    "name": "Prostate cancer",
+                    "children": []
+                  },
+                  {
+                    "name": "Lung cancer",
+                    "children": []
+                  },
+                  {
+                    "name": "Colorectal cancer",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Science",
+        "children": [
+          {
+            "name": "Physical and earth sciences",
+            "children": [
+              {
+                "name": "Astronomy",
+                "children": []
+              },
+              {
+                "name": "Chemistry",
+                "children": []
+              },
+              {
+                "name": "Physics",
+                "children": []
+              },
+              {
+                "name": "Geology",
+                "children": []
+              },
+              {
+                "name": "Marine science",
+                "children": []
+              },
+              {
+                "name": "Atmospheric science",
+                "children": []
+              },
+              {
+                "name": "Hydrology",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Technology",
+            "children": [
+              {
+                "name": "Assistive technology",
+                "children": []
+              },
+              {
+                "name": "Biotechnology",
+                "children": []
+              },
+              {
+                "name": "Computer science",
+                "children": []
+              },
+              {
+                "name": "Nanotechnology",
+                "children": []
+              },
+              {
+                "name": "Robotics",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Engineering",
+            "children": [
+              {
+                "name": "Aerospace engineering",
+                "children": []
+              },
+              {
+                "name": "Chemical engineering",
+                "children": []
+              },
+              {
+                "name": "Civil engineering",
+                "children": []
+              },
+              {
+                "name": "Electrical engineering",
+                "children": []
+              },
+              {
+                "name": "Mechanical engineering",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Biology",
+            "children": [
+              {
+                "name": "Biochemistry",
+                "children": []
+              },
+              {
+                "name": "Botany",
+                "children": []
+              },
+              {
+                "name": "Ecology",
+                "children": []
+              },
+              {
+                "name": "Genetic research",
+                "children": []
+              },
+              {
+                "name": "Human physiology",
+                "children": []
+              },
+              {
+                "name": "Molecular biology",
+                "children": []
+              },
+              {
+                "name": "Paleontology",
+                "children": []
+              },
+              {
+                "name": "Zoology",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Mathematics",
+            "children": []
+          },
+          {
+            "name": "Forensic science",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Social sciences",
+        "children": [
+          {
+            "name": "Anthropology",
+            "children": [
+              {
+                "name": "Archaeology",
+                "children": []
+              },
+              {
+                "name": "Physical anthropology",
+                "children": []
+              },
+              {
+                "name": "Cultural anthropology",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Sociology",
+            "children": []
+          },
+          {
+            "name": "Economics",
+            "children": []
+          },
+          {
+            "name": "Psychology and behavioral science",
+            "children": []
+          },
+          {
+            "name": "Political science",
+            "children": []
+          },
+          {
+            "name": "Population studies",
+            "children": []
+          },
+          {
+            "name": "Geography",
+            "children": []
+          },
+          {
+            "name": "Law",
+            "children": []
+          },
+          {
+            "name": "Interdisciplinary studies",
+            "children": [
+              {
+                "name": "American studies",
+                "children": []
+              },
+              {
+                "name": "Ethnic studies",
+                "children": [
+                  {
+                    "name": "Black studies",
+                    "children": []
+                  },
+                  {
+                    "name": "Latino and Hispanic studies",
+                    "children": []
+                  },
+                  {
+                    "name": "Indigenous studies",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Gender and sexuality studies",
+                "children": [
+                  {
+                    "name": "Women's studies",
+                    "children": []
+                  },
+                  {
+                    "name": "Men's studies",
+                    "children": []
+                  },
+                  {
+                    "name": "LGBTQ studies",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Gerontology",
+                "children": []
+              },
+              {
+                "name": "International studies",
+                "children": []
+              },
+              {
+                "name": "Labor studies",
+                "children": []
+              },
+              {
+                "name": "Poverty studies",
+                "children": []
+              },
+              {
+                "name": "Rural studies",
+                "children": []
+              },
+              {
+                "name": "Urban studies",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Paranormal and mystic studies",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Information and communications",
+        "children": [
+          {
+            "name": "News and public information",
+            "children": [
+              {
+                "name": "Journalism",
+                "children": [
+                  {
+                    "name": "Investigative journalism",
+                    "children": []
+                  },
+                  {
+                    "name": "Constituency journalism",
+                    "children": []
+                  },
+                  {
+                    "name": "Citizen journalism",
+                    "children": []
+                  },
+                  {
+                    "name": "Advocacy journalism",
+                    "children": []
+                  },
+                  {
+                    "name": "Photojournalism",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Open data",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Libraries",
+            "children": [
+              {
+                "name": "Academic libraries",
+                "children": []
+              },
+              {
+                "name": "Archives and special collections",
+                "children": [
+                  {
+                    "name": "Digital collections",
+                    "children": []
+                  },
+                  {
+                    "name": "Institutional archives",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Government libraries",
+                "children": []
+              },
+              {
+                "name": "Public libraries",
+                "children": []
+              },
+              {
+                "name": "School libraries and media centers",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Media access and policy",
+            "children": [
+              {
+                "name": "Media democracy",
+                "children": [
+                  {
+                    "name": "Internet neutrality",
+                    "children": []
+                  },
+                  {
+                    "name": "Digital divide",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Information and media literacy",
+                "children": []
+              },
+              {
+                "name": "Media justice",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Communication media",
+            "children": [
+              {
+                "name": "Audio recording",
+                "children": []
+              },
+              {
+                "name": "Film and video",
+                "children": []
+              },
+              {
+                "name": "Publishing",
+                "children": []
+              },
+              {
+                "name": "Radio",
+                "children": []
+              },
+              {
+                "name": "Television",
+                "children": []
+              },
+              {
+                "name": "Mobile media",
+                "children": []
+              },
+              {
+                "name": "Web-based media",
+                "children": [
+                  {
+                    "name": "Social media",
+                    "children": []
+                  },
+                  {
+                    "name": "Websites",
+                    "children": []
+                  },
+                  {
+                    "name": "Webcasting",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Information communications technology",
+            "children": [
+              {
+                "name": "Applications software",
+                "children": [
+                  {
+                    "name": "Assistive software",
+                    "children": []
+                  },
+                  {
+                    "name": "Data management software",
+                    "children": []
+                  },
+                  {
+                    "name": "Financial applications",
+                    "children": []
+                  },
+                  {
+                    "name": "Business applications",
+                    "children": []
+                  },
+                  {
+                    "name": "Content management software",
+                    "children": []
+                  },
+                  {
+                    "name": "Media development software",
+                    "children": []
+                  },
+                  {
+                    "name": "Web applications",
+                    "children": []
+                  },
+                  {
+                    "name": "Cloud computing",
+                    "children": []
+                  },
+                  {
+                    "name": "Geographic Information Systems",
+                    "children": []
+                  },
+                  {
+                    "name": "Interactive games",
+                    "children": []
+                  },
+                  {
+                    "name": "Simulation software",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Telecommunications",
+                "children": [
+                  {
+                    "name": "Internet",
+                    "children": []
+                  },
+                  {
+                    "name": "Mobile communications",
+                    "children": []
+                  },
+                  {
+                    "name": "Intranets",
+                    "children": []
+                  },
+                  {
+                    "name": "Online conferencing",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Computer Security",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Public safety",
+        "children": [
+          {
+            "name": "Crime prevention",
+            "children": [
+              {
+                "name": "Impaired driving",
+                "children": []
+              },
+              {
+                "name": "Cybercrime",
+                "children": []
+              },
+              {
+                "name": "Gun control",
+                "children": []
+              },
+              {
+                "name": "Missing persons",
+                "children": []
+              },
+              {
+                "name": "Narcotics control",
+                "children": []
+              },
+              {
+                "name": "Law enforcement",
+                "children": [
+                  {
+                    "name": "Community policing",
+                    "children": []
+                  },
+                  {
+                    "name": "Police agencies",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Abuse prevention",
+            "children": [
+              {
+                "name": "Bullying",
+                "children": []
+              },
+              {
+                "name": "Child abuse",
+                "children": []
+              },
+              {
+                "name": "Domestic violence",
+                "children": []
+              },
+              {
+                "name": "Elder abuse",
+                "children": []
+              },
+              {
+                "name": "Sexual abuse",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Courts",
+            "children": [
+              {
+                "name": "Dispute resolution",
+                "children": []
+              },
+              {
+                "name": "Family courts",
+                "children": []
+              },
+              {
+                "name": "Juvenile justice",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Legal services",
+            "children": [
+              {
+                "name": "Child advocacy",
+                "children": []
+              },
+              {
+                "name": "Guardianship",
+                "children": []
+              },
+              {
+                "name": "Housing law",
+                "children": []
+              },
+              {
+                "name": "Immigration law",
+                "children": []
+              },
+              {
+                "name": "Intellectual property",
+                "children": []
+              },
+              {
+                "name": "Legal aid",
+                "children": []
+              },
+              {
+                "name": "Public interest law",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Corrections and penology",
+            "children": [
+              {
+                "name": "Prison alternatives",
+                "children": []
+              },
+              {
+                "name": "Probation and parole",
+                "children": []
+              },
+              {
+                "name": "Rehabilitation of offenders",
+                "children": []
+              },
+              {
+                "name": "Services for offenders",
+                "children": []
+              },
+              {
+                "name": "Offender re-entry",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Disasters and emergency management",
+            "children": [
+              {
+                "name": "Civil protection",
+                "children": []
+              },
+              {
+                "name": "Disaster preparedness",
+                "children": []
+              },
+              {
+                "name": "Disaster reconstruction",
+                "children": []
+              },
+              {
+                "name": "Disaster relief",
+                "children": []
+              },
+              {
+                "name": "Internal resettlement",
+                "children": []
+              },
+              {
+                "name": "Disasters",
+                "children": [
+                  {
+                    "name": "Droughts",
+                    "children": []
+                  },
+                  {
+                    "name": "Earthquakes",
+                    "children": []
+                  },
+                  {
+                    "name": "Famines",
+                    "children": []
+                  },
+                  {
+                    "name": "Floods",
+                    "children": []
+                  },
+                  {
+                    "name": "Storms, hurricanes and tornadoes",
+                    "children": []
+                  },
+                  {
+                    "name": "Non-natural disasters",
+                    "children": []
+                  },
+                  {
+                    "name": "Tsunamis",
+                    "children": []
+                  },
+                  {
+                    "name": "Mass movements",
+                    "children": []
+                  },
+                  {
+                    "name": "Volcanos",
+                    "children": []
+                  },
+                  {
+                    "name": "Extreme temperatures",
+                    "children": []
+                  },
+                  {
+                    "name": "Wildfires",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Search and rescue",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Fire prevention and control",
+            "children": []
+          },
+          {
+            "name": "Safety education",
+            "children": [
+              {
+                "name": "First aid training",
+                "children": []
+              },
+              {
+                "name": "Traffic safety",
+                "children": [
+                  {
+                    "name": "Automotive safety",
+                    "children": []
+                  },
+                  {
+                    "name": "Pedestrian safety",
+                    "children": []
+                  },
+                  {
+                    "name": "Bicycle safety",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Poison control",
+                "children": []
+              },
+              {
+                "name": "Home safety",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Consumer protection",
+            "children": [
+              {
+                "name": "Universal design",
+                "children": []
+              },
+              {
+                "name": "Food safety",
+                "children": []
+              },
+              {
+                "name": "Drug safety",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Public affairs",
+        "children": [
+          {
+            "name": "Public policy",
+            "children": []
+          },
+          {
+            "name": "Leadership development",
+            "children": []
+          },
+          {
+            "name": "Public/private ventures",
+            "children": []
+          },
+          {
+            "name": "Democracy",
+            "children": [
+              {
+                "name": "Civic participation",
+                "children": []
+              },
+              {
+                "name": "Elections",
+                "children": [
+                  {
+                    "name": "Election regulation",
+                    "children": []
+                  },
+                  {
+                    "name": "Campaign finance",
+                    "children": []
+                  },
+                  {
+                    "name": "Political organizations",
+                    "children": []
+                  },
+                  {
+                    "name": "Voter education and registration",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Public integrity",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Public administration",
+            "children": [
+              {
+                "name": "Census",
+                "children": []
+              },
+              {
+                "name": "Public finance",
+                "children": []
+              },
+              {
+                "name": "Public works",
+                "children": []
+              },
+              {
+                "name": "Government regulation",
+                "children": []
+              },
+              {
+                "name": "Public assistance",
+                "children": [
+                  {
+                    "name": "Social security",
+                    "children": []
+                  },
+                  {
+                    "name": "Welfare",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "National security",
+            "children": [
+              {
+                "name": "Immigration and naturalization",
+                "children": []
+              },
+              {
+                "name": "Counterterrorism",
+                "children": [
+                  {
+                    "name": "Bioterrorism",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Customs and border control",
+                "children": []
+              },
+              {
+                "name": "Cyber warfare",
+                "children": []
+              },
+              {
+                "name": "National defense",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Public utilities",
+            "children": [
+              {
+                "name": "Electric utilities",
+                "children": []
+              },
+              {
+                "name": "Oil and gas utilities",
+                "children": []
+              },
+              {
+                "name": "Sewage utilities",
+                "children": []
+              },
+              {
+                "name": "Water utilities",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Agriculture, fishing and forestry",
+        "children": [
+          {
+            "name": "Agriculture",
+            "children": [
+              {
+                "name": "Farm viability",
+                "children": [
+                  {
+                    "name": "Farm bureaus and granges",
+                    "children": []
+                  },
+                  {
+                    "name": "Agricultural education",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Irrigation and water management",
+                "children": []
+              },
+              {
+                "name": "Farmlands",
+                "children": []
+              },
+              {
+                "name": "Livestock and ranching",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Food security",
+            "children": [
+              {
+                "name": "Community food systems",
+                "children": []
+              },
+              {
+                "name": "Sustainable agriculture",
+                "children": [
+                  {
+                    "name": "Agroecology",
+                    "children": []
+                  },
+                  {
+                    "name": "Agrodiversity",
+                    "children": []
+                  },
+                  {
+                    "name": "Organic farming",
+                    "children": []
+                  },
+                  {
+                    "name": "Genetically modified organisms",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Subsistence farming",
+                "children": []
+              },
+              {
+                "name": "Food sovereignty",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Forestry",
+            "children": [
+              {
+                "name": "Sustainable forestry",
+                "children": []
+              },
+              {
+                "name": "Non-timber forestry",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Fishing and aquaculture",
+            "children": [
+              {
+                "name": "Fish farms and hatcheries",
+                "children": []
+              },
+              {
+                "name": "Sustainable fishing",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Community and economic development",
+        "children": [
+          {
+            "name": "Sustainable development",
+            "children": []
+          },
+          {
+            "name": "Economic development",
+            "children": [
+              {
+                "name": "Urban development",
+                "children": [
+                  {
+                    "name": "Public transportation",
+                    "children": []
+                  },
+                  {
+                    "name": "Bicycling and pedestrian-oriented development",
+                    "children": []
+                  },
+                  {
+                    "name": "Green building",
+                    "children": []
+                  },
+                  {
+                    "name": "Urban sprawl",
+                    "children": []
+                  },
+                  {
+                    "name": "Urban planning",
+                    "children": []
+                  },
+                  {
+                    "name": "Urban renewal",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Rural development",
+                "children": []
+              },
+              {
+                "name": "Employment",
+                "children": [
+                  {
+                    "name": "Job counseling",
+                    "children": []
+                  },
+                  {
+                    "name": "Job training",
+                    "children": []
+                  },
+                  {
+                    "name": "Job retraining",
+                    "children": []
+                  },
+                  {
+                    "name": "Job creation and workforce development",
+                    "children": []
+                  },
+                  {
+                    "name": "Job benefits",
+                    "children": []
+                  },
+                  {
+                    "name": "Organized labor",
+                    "children": []
+                  },
+                  {
+                    "name": "Pensions",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Community improvement",
+            "children": [
+              {
+                "name": "Community beautification",
+                "children": [
+                  {
+                    "name": "Gardening",
+                    "children": []
+                  },
+                  {
+                    "name": "Landscaping",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Community organizing",
+                "children": []
+              },
+              {
+                "name": "Neighborhood associations",
+                "children": []
+              },
+              {
+                "name": "Community service",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Housing development",
+            "children": [
+              {
+                "name": "Foreclosure prevention",
+                "children": []
+              },
+              {
+                "name": "Housing rehabilitation",
+                "children": []
+              },
+              {
+                "name": "Public housing",
+                "children": []
+              },
+              {
+                "name": "Home ownership",
+                "children": []
+              },
+              {
+                "name": "Housing loss prevention",
+                "children": []
+              },
+              {
+                "name": "Tenants' organizations",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Financial services",
+            "children": [
+              {
+                "name": "Development finance",
+                "children": [
+                  {
+                    "name": "Microfinance",
+                    "children": []
+                  },
+                  {
+                    "name": "Sustainable finance",
+                    "children": []
+                  },
+                  {
+                    "name": "Community development finance",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Anti-predatory lending",
+                "children": []
+              },
+              {
+                "name": "Banking",
+                "children": []
+              },
+              {
+                "name": "Credit unions",
+                "children": []
+              },
+              {
+                "name": "Home financing",
+                "children": []
+              },
+              {
+                "name": "Insurance",
+                "children": []
+              },
+              {
+                "name": "Investment services",
+                "children": []
+              },
+              {
+                "name": "Financial counseling",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Business and industry",
+            "children": [
+              {
+                "name": "Business promotion",
+                "children": []
+              },
+              {
+                "name": "Construction",
+                "children": []
+              },
+              {
+                "name": "Corporate social responsibility",
+                "children": []
+              },
+              {
+                "name": "Manufacturing",
+                "children": []
+              },
+              {
+                "name": "Mining and resource extraction",
+                "children": []
+              },
+              {
+                "name": "Entrepreneurship",
+                "children": []
+              },
+              {
+                "name": "Social enterprise",
+                "children": []
+              },
+              {
+                "name": "Trade",
+                "children": []
+              },
+              {
+                "name": "Transport and storage",
+                "children": []
+              },
+              {
+                "name": "Real estate",
+                "children": []
+              },
+              {
+                "name": "Tourism",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Religion",
+        "children": [
+          {
+            "name": "Baha'i",
+            "children": []
+          },
+          {
+            "name": "Buddhism",
+            "children": []
+          },
+          {
+            "name": "Christianity",
+            "children": [
+              {
+                "name": "Protestantism",
+                "children": [
+                  {
+                    "name": "Baptist",
+                    "children": []
+                  },
+                  {
+                    "name": "Episcopalianism and Anglicanism",
+                    "children": []
+                  },
+                  {
+                    "name": "Lutheranism",
+                    "children": []
+                  },
+                  {
+                    "name": "Methodism",
+                    "children": []
+                  },
+                  {
+                    "name": "Presbyterianism",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Catholicism",
+                "children": []
+              },
+              {
+                "name": "Orthodox Christianity",
+                "children": []
+              },
+              {
+                "name": "Mormonism",
+                "children": []
+              },
+              {
+                "name": "Evangelicalism",
+                "children": []
+              },
+              {
+                "name": "Christian Science",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Confucianism",
+            "children": []
+          },
+          {
+            "name": "Hinduism",
+            "children": []
+          },
+          {
+            "name": "Islam",
+            "children": [
+              {
+                "name": "Sunni",
+                "children": []
+              },
+              {
+                "name": "Shi'a",
+                "children": []
+              },
+              {
+                "name": "Sufism",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Judaism",
+            "children": [
+              {
+                "name": "Orthodox Judaism",
+                "children": []
+              },
+              {
+                "name": "Reform Judaism",
+                "children": []
+              },
+              {
+                "name": "Conservative Judaism",
+                "children": []
+              },
+              {
+                "name": "Reconstructionist Judaism",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Sikhism",
+            "children": []
+          },
+          {
+            "name": "Shintoism",
+            "children": []
+          },
+          {
+            "name": "Tribal and indigenous religions",
+            "children": []
+          },
+          {
+            "name": "Interfaith",
+            "children": []
+          },
+          {
+            "name": "Spirituality",
+            "children": []
+          },
+          {
+            "name": "Theology",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Sports and recreation",
+        "children": [
+          {
+            "name": "Community recreation",
+            "children": [
+              {
+                "name": "Camps",
+                "children": []
+              },
+              {
+                "name": "Parks",
+                "children": []
+              },
+              {
+                "name": "Playgrounds",
+                "children": []
+              },
+              {
+                "name": "Festivals",
+                "children": []
+              },
+              {
+                "name": "Clubs",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Sports",
+            "children": [
+              {
+                "name": "Baseball and softball",
+                "children": []
+              },
+              {
+                "name": "Basketball",
+                "children": []
+              },
+              {
+                "name": "Combat sports",
+                "children": []
+              },
+              {
+                "name": "Cycling",
+                "children": []
+              },
+              {
+                "name": "Equestrianism",
+                "children": []
+              },
+              {
+                "name": "American football",
+                "children": []
+              },
+              {
+                "name": "Golf",
+                "children": []
+              },
+              {
+                "name": "Gymnastics",
+                "children": []
+              },
+              {
+                "name": "Outdoor sports",
+                "children": [
+                  {
+                    "name": "Fishing and hunting",
+                    "children": []
+                  },
+                  {
+                    "name": "Hiking and walking",
+                    "children": []
+                  },
+                  {
+                    "name": "Mountain and rock climbing",
+                    "children": []
+                  },
+                  {
+                    "name": "Orienteering",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Racquet sports",
+                "children": []
+              },
+              {
+                "name": "Running",
+                "children": []
+              },
+              {
+                "name": "European football",
+                "children": []
+              },
+              {
+                "name": "Winter sports",
+                "children": [
+                  {
+                    "name": "Ice skating",
+                    "children": []
+                  },
+                  {
+                    "name": "Skiing and snowboarding",
+                    "children": []
+                  },
+                  {
+                    "name": "Ice hockey",
+                    "children": []
+                  },
+                  {
+                    "name": "Sledding",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Table tennis",
+                "children": []
+              },
+              {
+                "name": "Track and field",
+                "children": []
+              },
+              {
+                "name": "Volleyball",
+                "children": []
+              },
+              {
+                "name": "Water sports",
+                "children": [
+                  {
+                    "name": "Boating",
+                    "children": []
+                  },
+                  {
+                    "name": "Swimming",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Adaptive sports",
+                "children": []
+              },
+              {
+                "name": "Olympics",
+                "children": []
+              },
+              {
+                "name": "Special Olympics",
+                "children": []
+              },
+              {
+                "name": "Paralympics",
+                "children": []
+              },
+              {
+                "name": "Sports training",
+                "children": [
+                  {
+                    "name": "School athletics",
+                    "children": []
+                  },
+                  {
+                    "name": "Intramural sports",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Human rights",
+        "children": [
+          {
+            "name": "Individual liberties",
+            "children": [
+              {
+                "name": "Right to life",
+                "children": []
+              },
+              {
+                "name": "Right to die",
+                "children": []
+              },
+              {
+                "name": "Freedom from violence and torture",
+                "children": []
+              },
+              {
+                "name": "Freedom from slavery",
+                "children": []
+              },
+              {
+                "name": "Freedom of association and expression",
+                "children": []
+              },
+              {
+                "name": "Right to privacy",
+                "children": []
+              },
+              {
+                "name": "Freedom of religion",
+                "children": []
+              },
+              {
+                "name": "Right to free movement and asylum",
+                "children": []
+              },
+              {
+                "name": "Reproductive rights",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Social rights",
+            "children": [
+              {
+                "name": "Traditional marriage",
+                "children": []
+              },
+              {
+                "name": "Marriage equality",
+                "children": []
+              },
+              {
+                "name": "Freedom of information",
+                "children": []
+              },
+              {
+                "name": "Voter rights",
+                "children": []
+              },
+              {
+                "name": "Labor rights",
+                "children": []
+              },
+              {
+                "name": "Environmental and resource rights",
+                "children": []
+              },
+              {
+                "name": "Cultural rights",
+                "children": []
+              },
+              {
+                "name": "Economic justice",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Justice rights",
+            "children": [
+              {
+                "name": "Due process",
+                "children": []
+              },
+              {
+                "name": "Capital punishment",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Antidiscrimination",
+            "children": [
+              {
+                "name": "Immigrants' rights",
+                "children": []
+              },
+              {
+                "name": "Ethnic and racial minority rights",
+                "children": []
+              },
+              {
+                "name": "Disabled persons' rights",
+                "children": []
+              },
+              {
+                "name": "Women's rights",
+                "children": []
+              },
+              {
+                "name": "Rights of the aged",
+                "children": []
+              },
+              {
+                "name": "LGBTQ rights",
+                "children": []
+              },
+              {
+                "name": "Children's rights",
+                "children": []
+              },
+              {
+                "name": "Prisoners' rights",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Diversity and intergroup relations",
+            "children": []
+          }
+        ]
+      },
+      {
+        "name": "Human services",
+        "children": [
+          {
+            "name": "Human services management",
+            "children": []
+          },
+          {
+            "name": "Human services information",
+            "children": []
+          },
+          {
+            "name": "Basic and emergency aid",
+            "children": [
+              {
+                "name": "Travelers' aid",
+                "children": []
+              },
+              {
+                "name": "Victim aid",
+                "children": []
+              },
+              {
+                "name": "Thrift shops",
+                "children": []
+              },
+              {
+                "name": "Gift distribution",
+                "children": []
+              },
+              {
+                "name": "Free goods distribution",
+                "children": []
+              },
+              {
+                "name": "Food aid",
+                "children": [
+                  {
+                    "name": "Food banks",
+                    "children": []
+                  },
+                  {
+                    "name": "Food delivery",
+                    "children": []
+                  },
+                  {
+                    "name": "Dining services",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Family services",
+            "children": [
+              {
+                "name": "Adult day care",
+                "children": []
+              },
+              {
+                "name": "Adolescent parenting",
+                "children": []
+              },
+              {
+                "name": "Child welfare",
+                "children": [
+                  {
+                    "name": "Adoption",
+                    "children": []
+                  },
+                  {
+                    "name": "Child care",
+                    "children": []
+                  },
+                  {
+                    "name": "Child development",
+                    "children": []
+                  },
+                  {
+                    "name": "Foster care",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Family counseling",
+                "children": []
+              },
+              {
+                "name": "Family disability resources",
+                "children": []
+              },
+              {
+                "name": "In-home aid and personal assistance",
+                "children": []
+              },
+              {
+                "name": "Parent education",
+                "children": []
+              },
+              {
+                "name": "Single parent support",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Youth development",
+            "children": [
+              {
+                "name": "Youth services",
+                "children": []
+              },
+              {
+                "name": "Scouting programs",
+                "children": []
+              },
+              {
+                "name": "Youth mentoring",
+                "children": [
+                  {
+                    "name": "Adult and child mentoring",
+                    "children": []
+                  },
+                  {
+                    "name": "Intergenerational mentoring",
+                    "children": []
+                  },
+                  {
+                    "name": "Youth peer mentoring",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Youth organizing",
+                "children": []
+              },
+              {
+                "name": "Agriculture for youth",
+                "children": []
+              },
+              {
+                "name": "Economics for youth",
+                "children": []
+              },
+              {
+                "name": "Civics for youth",
+                "children": []
+              },
+              {
+                "name": "Community service for youth",
+                "children": []
+              },
+              {
+                "name": "Religion for youth",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Personal services",
+            "children": [
+              {
+                "name": "Adult peer mentoring",
+                "children": []
+              },
+              {
+                "name": "Cemeteries and burial services",
+                "children": []
+              },
+              {
+                "name": "Paratransit",
+                "children": []
+              },
+              {
+                "name": "Self-advocacy",
+                "children": []
+              },
+              {
+                "name": "Self-help groups",
+                "children": []
+              },
+              {
+                "name": "Transition planning",
+                "children": [
+                  {
+                    "name": "Benefits planning",
+                    "children": []
+                  },
+                  {
+                    "name": "Aging out of foster care",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Shelter and residential care",
+            "children": [
+              {
+                "name": "Supportive housing",
+                "children": [
+                  {
+                    "name": "Domestic violence shelters",
+                    "children": []
+                  },
+                  {
+                    "name": "Housing for the homeless",
+                    "children": []
+                  },
+                  {
+                    "name": "Housing for people with disabilities",
+                    "children": []
+                  },
+                  {
+                    "name": "Group homes",
+                    "children": []
+                  },
+                  {
+                    "name": "Orphanages",
+                    "children": []
+                  },
+                  {
+                    "name": "Transitional living",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Elder housing",
+                "children": [
+                  {
+                    "name": "Senior assisted living",
+                    "children": []
+                  },
+                  {
+                    "name": "Retirement housing",
+                    "children": []
+                  },
+                  {
+                    "name": "Nursing homes",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Housing services",
+                "children": [
+                  {
+                    "name": "Home accessibility",
+                    "children": []
+                  },
+                  {
+                    "name": "Home repairs",
+                    "children": []
+                  },
+                  {
+                    "name": "Rent and mortgage assistance",
+                    "children": []
+                  },
+                  {
+                    "name": "Utility expense assistance",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Homeless shelters",
+                "children": []
+              },
+              {
+                "name": "Temporary accommodations",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Job services",
+            "children": [
+              {
+                "name": "Unemployment compensation",
+                "children": []
+              },
+              {
+                "name": "Sheltered employment",
+                "children": []
+              },
+              {
+                "name": "Vocational rehabilitation",
+                "children": []
+              }
+            ]
+          },
+          {
+            "name": "Special population support",
+            "children": [
+              {
+                "name": "Developmental disability services",
+                "children": []
+              },
+              {
+                "name": "Homeless services",
+                "children": []
+              },
+              {
+                "name": "Immigrant services",
+                "children": []
+              },
+              {
+                "name": "Independent living for people with disabilities",
+                "children": []
+              },
+              {
+                "name": "Senior services",
+                "children": []
+              },
+              {
+                "name": "Women's services",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "International relations",
+        "children": [
+          {
+            "name": "Foreign policy",
+            "children": []
+          },
+          {
+            "name": "Goodwill promotion",
+            "children": []
+          },
+          {
+            "name": "International development",
+            "children": []
+          },
+          {
+            "name": "International economics and trade",
+            "children": []
+          },
+          {
+            "name": "International exchange",
+            "children": []
+          },
+          {
+            "name": "Multilateral cooperation",
+            "children": []
+          },
+          {
+            "name": "International peace and security",
+            "children": [
+              {
+                "name": "Arms control",
+                "children": [
+                  {
+                    "name": "Arms trafficking",
+                    "children": []
+                  },
+                  {
+                    "name": "Disarmament",
+                    "children": []
+                  },
+                  {
+                    "name": "Landmines",
+                    "children": []
+                  },
+                  {
+                    "name": "Nuclear non-proliferation and disarmament",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "name": "Conflict resolution and peacebuilding",
+                "children": []
+              },
+              {
+                "name": "Conflict and atrocities prevention",
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Unknown or not classified",
+        "children": []
+      }
+    ]
+  }

@@ -48,7 +48,7 @@ class SummaryView(View):
         gg_india = {
             "total": GGIndiaNGO.objects.count(),
             "Name": "Guidestar India",
-            "status": "Running"
+            "status": "Approved"
         }
         
         c_nav = {
@@ -62,7 +62,7 @@ class SummaryView(View):
         data = [pledge, c_nav, guide_star, global_giving, irs_xml, irs_zip,fcra_app,gg_india]
         
         total = sum([i["total"] for i in data])
-        expected = 4500000
+        expected = 5000000
         
         percentage = int((total/expected)*100)
         

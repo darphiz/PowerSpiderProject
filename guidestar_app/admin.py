@@ -10,8 +10,8 @@ class NGOAdmin(admin.ModelAdmin):
 
 
 class URLIndexAdmin(admin.ModelAdmin):
-    list_display = ["url", "is_scraped", "scraped_on"]
-    list_filter = ["is_scraped", "locked"]
+    list_display = ["url", "is_scraped", "scraped_on", "trial"]
+    list_filter = ["is_scraped", "locked", "trial"]
     search_fields = ["url"]
     actions = [remove_scraped,]    
 

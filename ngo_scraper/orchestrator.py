@@ -1,9 +1,9 @@
 SCRAPER_Q = {
     # scrape indexed pledge urls
-    'start_scraping_pledge': {
-        'task' : 'start_scraping',
-        'schedule' : 15.0,
-    },
+    # 'start_scraping_pledge': {
+    #     'task' : 'start_scraping',
+    #     'schedule' : 10.0,
+    # },
        
     # Scraper to scrape data from global_giving website
     # "gg_url_crawler": {
@@ -21,7 +21,7 @@ SCRAPER_Q = {
     # scrape guide star indexed urls
     "start_scraping_guidestar" : {
         "task": "start_scraping_guidestar",
-        "schedule": 18.0,
+        "schedule": 10.0,
     },
     
     # scrape indexed urls from irs
@@ -32,10 +32,10 @@ SCRAPER_Q = {
     
     
     # scrape indexed urls from guide star india
-    "start_scraping_ggi" : {
-        "task": "start_scraping_ggi",
-        "schedule": 300.0,
-    }
+    # "start_scraping_ggi" : {
+    #     "task": "start_scraping_ggi",
+    #     "schedule": 300.0,
+    # }
     
     # download xml file from irs
     # "download_xml_file" : {
