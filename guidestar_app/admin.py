@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GuideStarIndexedUrl, CrawlCursor, NGO,LastPage, ErrorPage
+from .models import GuideStarIndexedUrl, CrawlCursor, NGO,LastPage, ErrorPage,FailedFiles
 
 def remove_scraped(modeladmin, request, queryset):
     queryset.update(is_scraped=False, locked=False, trial=0)
@@ -20,3 +20,4 @@ admin.site.register(CrawlCursor)
 admin.site.register(NGO, NGOAdmin)
 admin.site.register(LastPage)
 admin.site.register(ErrorPage)
+admin.site.register(FailedFiles)

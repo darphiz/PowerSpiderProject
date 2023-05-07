@@ -173,4 +173,7 @@ data.json
 /env
 irs_zip/
 irs_xml/
+
+# all folders in sorter but allow files
+sorter/*
 data-download-epostcard.txt

@@ -6,7 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', SummaryView.as_view(), name='summary'),
     # path('pledge/', include('pledge_app.urls')),
-    # path('gg/', include('global_giving.urls')),
+    path('gg/', include('global_giving.urls')),
     # path('fcra/', include('fcra_app.urls')),
     # path('guidestar/', include('guidestar_app.urls')),
     # path('irs/', include('irs_app.urls')),

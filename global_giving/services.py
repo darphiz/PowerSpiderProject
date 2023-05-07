@@ -21,7 +21,7 @@ class GlobalGivingScraper(
     ImageDownloader,
     Helper
     ):
-    def __init__(self, link) -> None:
+    def __init__(self, link:str=None) -> None:
         self.url = "https://www.globalgiving.org"
         self.model = GlobalGivingIndexedUrl 
         self.link = link
@@ -74,13 +74,25 @@ class GlobalGivingScraper(
 
     
 
-    def _get_org_addr(self, page_soup):
+    def _legacy_org_addr(self, page_soup):
         with suppress(Exception):
             addr_selector = "body > div:nth-child(2) > section.layout_center.org_map.col_defaultBg.layout_rel > div > div > div.grid-0.grid-lg-12.org_info_overlay.layout_abs.layout_abs_leftInner.org_info_overlay_centerVertical.layout_alignLeft.border_default.col_white.box_verticalPadded3.box_horizontalPadded2 > div.box_topPadded2 > div"
             addr = page_soup.select(addr_selector)
             addr = addr[0].text
             return self.clean_text(addr).title()    
-        return ""
+        return None 
+    
+    def _get_org_addr(self, page_soup):
+        legacy_org_addr = self._legacy_org_addr(page_soup)
+        addr = None
+        with suppress(Exception):
+            itemprop = "address"
+            addr_div = page_soup.find("div", itemprop=itemprop)
+            if addr_div:
+                addr = addr_div.text
+                addr = self.clean_text(addr)
+        return addr or legacy_org_addr
+    
 
     def _get_country(self, page_soup):
         with suppress(Exception):
@@ -99,22 +111,41 @@ class GlobalGivingScraper(
     def _get_causes(self, page_soup):
         with suppress(Exception):
             causes_container_div = "body > div:nth-child(2) > section:nth-child(5) > div > div > div.grid-parent.layout_center.js-projectsList > div > div.paginate_content.grid-parent.layout_center"
-            causes_div = page_soup.select(causes_container_div)
+            causes_container_div_2 = "body > div:nth-child(2) > section:nth-child(4) > div > div > div > div > div.paginate_content.grid-parent.layout_center"
+            causes_div_1 = page_soup.select(causes_container_div)
+            causes_div_2 = page_soup.select(causes_container_div_2)
+            causes_div = causes_div_1 or causes_div_2
             causes = causes_div[0].find_all("div", class_="grid-12 grid-ml-6 grid-lg-4 box_bottomMargin3 box_horizontalPadded1 js-project_tile project_tile")
             causes = [cause.find_all("a")[2].text for cause in causes]
-            return self.generator_get_causes(causes)
+            the_cause = self.generator_get_causes(causes, 60)
+            if the_cause:
+                return the_cause 
+            unknown_cause = ["Unknown"]
+            return self.generator_get_causes(unknown_cause, 60)
         return None
             
     
-    def _get_phone(self, page_soup):
+    def _legacy_phone(self, page_soup):
         with suppress(Exception):
             phone_selector = "body > div:nth-child(2) > section.layout_center.org_map.col_defaultBg.layout_rel > div > div > div.grid-0.grid-lg-12.org_info_overlay.layout_abs.layout_abs_leftInner.org_info_overlay_centerVertical.layout_alignLeft.border_default.col_white.box_verticalPadded3.box_horizontalPadded2 > div.box_topPadded2 > span"
             phone = page_soup.select(phone_selector)
             return self.clean_phone(phone) if (phone := phone[0].text) else phone
         return None
     
+    def _get_phone(self, page_soup):
+        legacy_phone = self._legacy_phone(page_soup)
+        new_phone = None
+        with suppress(Exception):
+            if phone := page_soup.find("span", itemprop="telephone"):
+                phone = phone.text
+                new_phone = self.clean_phone(phone)
+        return new_phone or legacy_phone  
     
     def _get_website(self, page_soup):
+        itemprop = "url"
+        web = page_soup.find("a", itemprop=itemprop)
+        if web:
+            return self.clean_link(web.get("href"))
         with suppress(Exception):
             website_selector = "body > div:nth-child(2) > section.layout_center.org_map.col_defaultBg.layout_rel > div > div > div.grid-0.grid-lg-12.org_info_overlay.layout_abs.layout_abs_leftInner.org_info_overlay_centerVertical.layout_alignLeft.border_default.col_white.box_verticalPadded3.box_horizontalPadded2 > div:nth-child(2) > a"
             website = page_soup.select(website_selector)
@@ -123,11 +154,22 @@ class GlobalGivingScraper(
             return self.clean_link(link)
         return ""
     
-    def _get_mission(self, page_soup):
+    def _get_m_v2(self, page_soup):
+        mission_selector = "body > div:nth-child(2) > section:nth-child(3) > div > div > div.layout_alignLeft > p"
+        mission = page_soup.select(mission_selector)
+        return self.clean_text(mission[0].text) if mission else None
+    def _get_m_v1(self, page_soup):
         mission_selector = "body > div:nth-child(2) > section:nth-child(4) > div > div > div.layout_alignLeft > p"
         mission = page_soup.select(mission_selector)
         return self.clean_text(mission[0].text) if mission else None
-
+    
+    
+    def _get_mission(self, page_soup):
+        mission = self._get_m_v2(page_soup)
+        if mission:
+            return mission
+        return self._get_m_v1(page_soup)
+    
     def _get_description(self, page_soup):
         challenge = self._extract(
             "body > div.col_defaultBg.cuke-project > div.grid-padder.grid-parent.box_bottomPadded3 > div.grid-12.grid-md-6.grid-lg-8.box_padded1 > div.border_default.col_white.box_padded3.js-story > div.grid-0.grid-md-12.js-readMore > div.box_topMargin3 > p:nth-child(2)",
@@ -146,9 +188,9 @@ class GlobalGivingScraper(
         return result
         
     def _get_reg_year(self, page_soup):
-        year_selector = "body > div:nth-child(2) > section:nth-child(4) > div > div > div.grid-parent.layout_center > div:nth-child(1) > div.text_fontSizeLarger.text_7n.col_ggPrimary3Text > span"
-        year = page_soup.select(year_selector)
-        return self.clean_number(year[0].text) if year else None
+        year_itemprop = "foundingDate"
+        year = page_soup.find("span", itemprop=year_itemprop)
+        return self.clean_number(year.text) if year else None
     
     def _scrape_image(self, page_soup):
         with suppress(Exception):
@@ -175,10 +217,11 @@ class GlobalGivingScraper(
             return self.download_images(images, self.image_path, self.data["organization_name"])
         return None
     
-    def scrape(self):
-        response = self.query(self.detail_link)
+    def scrape(self, detail_link: str=None, scrape_images: bool=True):
+        response = self.query(detail_link or self.detail_link)
         if response.status_code != 200:
             logger.error(f"Error scraping {self.detail_link} -> {response.status_code}")
+            print(f"Error scraping {self.detail_link} -> {response.status_code}")
             return
         page_soup = BeautifulSoup(response.content, "html.parser")
         self.data["organization_address"] = self.clean_text(self._get_org_addr(page_soup))
@@ -195,9 +238,11 @@ class GlobalGivingScraper(
         self.data["registration_date_month"] = ""
         self.data["registration_date_day"] = ""
         self.data["gross_income"] = ""
-        self.data["image"] = self._scrape_image(page_soup)
+        if scrape_images:
+            self.data["image"] = self._scrape_image(page_soup)
         self.data["domain"] = self.format_list([self.url,])
         self.data["urls_scraped"] = self.format_list([self.detail_link,])
+        return self.data
     
     def crawl(self):
         link = self._patch_url()
@@ -217,5 +262,10 @@ class GlobalGivingScraper(
         self.data["urls_scraped"] = self.format_list([link,])
         with suppress(Exception):
             self.scrape()
+        # if no country return None
+        if not self.data["country"]:
+            logger.error(f"Error crawling {link} -> country not found")
+            return        
+        
         return self.data
         

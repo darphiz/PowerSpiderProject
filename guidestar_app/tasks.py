@@ -1,3 +1,4 @@
+import re
 import logging
 from celery import shared_task
 from guidestar_app.models import CrawlCursor, GuideStarIndexedUrl, NGO
@@ -87,6 +88,41 @@ def scrape_guidestar_data(url, init_data=None):
             )
     return
 
+@shared_task(name="re_scrape_guidestar_data")
+def re_scrape_guidestar_data(url, d_ein):
+    try:
+        spider = GuideStarScraper()
+        data = spider.scrape_image_only(url)
+        if not data:
+            log.error(f"ERROR: {url} - No data found")
+            return
+        try:
+            ein = data["govt_reg_number"]
+            ng = NGO.objects.get(govt_reg_number=ein)
+            ng.image = data["image"]
+            ng.resolved = True
+            ng.save()
+        except NGO.DoesNotExist:
+            pass
+        
+        except Exception as e:
+            NGO.objects.filter(govt_reg_number=d_ein).update(resolved=False, locked=False)
+            log.error(f"ERROR: {url} - {str(e)}")
+            notification.alert(
+                Notify.error(
+                    f"ERROR: {url}: \n{str(e)}"
+                )
+            )
+        log.info(f"SUCCESS: Scraped {url}")
+    except Exception as e:
+        NGO.objects.filter(govt_reg_number=d_ein).update(resolved=False, locked=False)
+        log.error(f"ERROR: {url} - {str(e)}")
+        notification.alert(
+                Notify.error(
+                    f"ERROR: {url}: \n{str(e)}"
+                )
+            )
+    return
 
 
 @shared_task(name="start_scraping_guidestar")
@@ -105,4 +141,18 @@ def guide_star_orchestration():
             "state": url.state
         }
         scrape_guidestar_data.delay(url=scrape_url, init_data=data)
+    return
+
+def reverse_list(string):
+    return re.findall(r'"([^"]*)"', string)
+
+@shared_task(name="start_scraping_guidestar_v2")
+def start_scraping_guidestar_v2():
+    chunk = NGO.objects.filter(image__isnull=False, resolved=False, locked=False)[:25]
+    for ngo in chunk:
+        scrape_url = reverse_list(ngo.urls_scraped)[0]
+        ngo.locked = True
+        ngo.save()
+        ein = ngo.govt_reg_number
+        re_scrape_guidestar_data.delay(url=scrape_url, d_ein=ein)
     return

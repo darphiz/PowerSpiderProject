@@ -5,10 +5,9 @@ from django.http import JsonResponse
 
 class GGView(View):
     def get(self, request, *args, **kwargs):
-        url = "/microprojects/restore-acosmetics-shop-that-caught-fire-in-uganda/"
-        
-        data = GlobalGivingScraper(url).crawl()
-        
+        url = "https://www.globalgiving.org/donate/68515/kenyan-network-of-cancer-organizations-kenco/"
+        data = GlobalGivingScraper().scrape(url, scrape_images=False)
         return JsonResponse(data, safe=False) 
+
 
 

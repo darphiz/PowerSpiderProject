@@ -8,6 +8,10 @@ from django.db import transaction
 from django.utils.timezone import now
 from django.conf import settings
 from django.db.utils import IntegrityError
+import re 
+
+def reverse_list(string):
+    return re.findall(r'"([^"]*)"', string)
 
 
 @shared_task(name="do_url_indexing")
@@ -61,29 +65,21 @@ def crawl_pledge():
     
     
 @shared_task(name="scraper_pledge")
-def scrape_pledge_data(url):
+def scrape_pledge_data(url, id):
     HOOK = settings.PLEDGE_HOOK
     logger = logging.getLogger(__name__)
     try:
         spider = PledgeScraper(url)
         data = spider.scrape()
-        with transaction.atomic():
-            NGO.objects.update_or_create(**data)
-            PledgeIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
+        if data.get("image", None) is None:
+            raise Exception("No image found")
+        NGO.objects.filter(id=id).update(resolved=True, locked=True, image=data["image"])
         logger.info(f"SUCCESS: Scraped {url}")
     # skip in place of duplicate entry error
     except IntegrityError:
         Notify(HOOK).alert(Notify.warn(f"Duplicate entry error skipping: {url}"))
-        PledgeIndexedUrl.objects.filter(url=url).update(is_scraped=True, scraped_on=now())
         
-    
     except Exception as e:
-        with suppress(Exception):
-            update_url = PledgeIndexedUrl.objects.get(url=url)
-            update_url.trial += 1
-            update_url.is_scraped = False
-            update_url.locked = False
-            update_url.save()
         logger.error(f"ERROR: {url} - {str(e)}")
         Notify(HOOK).alert(Notify.error(f"{url} \n{str(e)}"))
     return 
@@ -105,6 +101,18 @@ def scrape_orchestration():
         scrape_pledge_data.delay(url=scrape_url)
     return
 
+@shared_task(name="start_scraping_2")
+def scrape_orchestration_2():
+    to_scrape = NGO.objects.filter(resolved=False, locked=False)[:10]
+    if not to_scrape:
+        Notify(settings.PLEDGE_HOOK).alert(Notify.info("No more urls to scrape"))
+        return
+    for ngo in to_scrape:
+        url = reverse_list(ngo.urls_scraped)[0]
+        ngo.locked = True
+        ngo.save()
+        scrape_pledge_data.delay(url=url, id=ngo.id)
+    return
 
 @shared_task(name="report_pledge")
 def report_pledge():

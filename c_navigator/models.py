@@ -50,7 +50,7 @@ class NGO(models.Model):
 
     class Meta:
         verbose_name_plural = "NGOs"
-        ordering = ['organization_name']
+        # ordering = ['organization_name']
 
 class LastPage(models.Model):
     page = models.IntegerField(default=1)

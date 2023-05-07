@@ -22,11 +22,9 @@ class IRSIndexedUrlAdmin(admin.ModelAdmin):
     list_filter = ('is_scraped', 'locked', 'trial',)
     search_fields = ('url',)
     actions = [remove_scraped, ]
-class NGOAdmin(admin.ModelAdmin):
-    list_filter = ("domain","country" )
 
-admin.site.register(NGO, NGOAdmin)
-admin.site.register(NGO_V2, NGOAdmin)
+admin.site.register(NGO)
+admin.site.register(NGO_V2)
 
 admin.site.register(XMLUrlIndexer, XMlURLIndexerAdmin)
 admin.site.register(IRSIndexedUrl, IRSIndexedUrlAdmin)

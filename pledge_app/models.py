@@ -47,13 +47,12 @@ class NGO(models.Model):
     image = models.TextField(max_length=200, null=True)
     domain = models.CharField(max_length=200, null=True)
     urls_scraped =  models.TextField(null=True)
-
     def __str__(self) -> str:
         return self.organization_name
     
     class Meta:
         unique_together = ('organization_name', 'state')
-        ordering = ['organization_name', 'state']
+        # ordering = ['organization_name', 'state']
 class Cause(models.Model):
     cause = models.CharField(max_length=200, unique=True, default="education")
     def __str__(self) -> str:

@@ -94,7 +94,8 @@ class PledgeScraper(ProxyRequestClient,
         return super().__init__()
     
     def _patch_url(self):
-        return f"{self.url}{self.link}"
+        # return f"{self.url}{self.link}"
+        return self.link
     
     def _get_org_address(self, page_soup:BeautifulSoup):
         with suppress(Exception):

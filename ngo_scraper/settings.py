@@ -29,6 +29,8 @@ INSTALLED_APPS = [
     'irs_app',
     'c_navigator',
     'global_giving_india',
+    'sorter',
+    'merger'
 ]
 
 MIDDLEWARE = [
@@ -146,6 +148,14 @@ LOGGING = {
         },
     },
 }
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
 PROXY_URL = environ.get("PROXY_URL", None)
 PLEDGE_HOOK = environ.get("PLEDGE_HOOK", None)
 FRCA_HOOK = environ.get("FRCA_HOOK", None)

@@ -1,11 +1,16 @@
 SCRAPER_Q = {
-    # scrape indexed pledge urls
-    # 'start_scraping_pledge': {
-    #     'task' : 'start_scraping',
-    #     'schedule' : 10.0,
+    # # scrape indexed pledge urls
+    # 'start_scraping_pledge_2': {
+    #     'task' : 'start_scraping_2',
+    #     'schedule' : 15.0,
     # },
+    
+    'merger_orchestrator': {
+        'task' : 'merger_orchestrator',
+        'schedule' : 50.0,
+    },
        
-    # Scraper to scrape data from global_giving website
+    # # Scraper to scrape data from global_giving website
     # "gg_url_crawler": {
     #     "task": "start_scraping_gg",
     #     "schedule": 12.0,
@@ -19,10 +24,15 @@ SCRAPER_Q = {
     
     
     # scrape guide star indexed urls
-    "start_scraping_guidestar" : {
-        "task": "start_scraping_guidestar",
-        "schedule": 10.0,
-    },
+    # "start_scraping_guidestar" : {
+    #     "task": "start_scraping_guidestar",
+    #     "schedule": 13.0,
+    # },
+    
+    # "start_scraping_guidestar_v2" : {
+    #     "task": "start_scraping_guidestar_v2",
+    #     "schedule": 13.0,
+    # },
     
     # scrape indexed urls from irs
     # "start_scraping_irs" : {

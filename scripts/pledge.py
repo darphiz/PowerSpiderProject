@@ -141,10 +141,5 @@ def index_pledge_link(sub_causes_only:bool=False):
 
 
 
-#matches
-# pure cause done
-# pure sub cause done
-# pure state done
-# pure country done
-# pure sub cause and state done
-# country and cause done
+
+# cause, state, country 

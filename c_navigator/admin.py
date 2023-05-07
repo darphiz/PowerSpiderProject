@@ -8,7 +8,7 @@ class CrawlCursorAdmin(admin.ModelAdmin):
 
 class NGOAdmin(admin.ModelAdmin):
     list_display = ('organization_name', 'state', 'cause')
-    search_fields = ('organization_name', 'state')
+    search_fields = ('organization_name', "govt_reg_number")
     
 admin.site.register(CrawlCursor, CrawlCursorAdmin)
 admin.site.register(NGO, NGOAdmin)

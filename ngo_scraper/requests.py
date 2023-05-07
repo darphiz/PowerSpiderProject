@@ -3,7 +3,6 @@ import uuid
 import json
 from random import choices
 from fake_useragent import UserAgent
-import tls_client
 import requests
 import urllib3
 from fuzzywuzzy import fuzz
@@ -235,7 +234,7 @@ class CleanData:
 class ImageDownloader:
     @retry(Exception, tries=2, delay=2)    
     def _download(self, image_url, file_path):
-        proxy = "http://swxthcae-rotate:pm8t1rnfa0dc@p.webshare.io:80/"
+        proxy = "http://oywhpasl-rotate:3ljqiirnl8i1@p.webshare.io:80/"
         proxies = {
             "http": proxy,
             "https": proxy

@@ -78,12 +78,8 @@ class GuideStarScraper(
     """
     This will scrape all indexed url
     """
-    def __init__(self, url:str, initial_data:dict = {}) -> None:
+    def __init__(self, url:str="", initial_data:dict = {}) -> None:
         self.url = url
-        if not self.url:
-            raise GuideStarException("url cannot be empty")
-        if not url.startswith("/"):
-            self.url = f"/{url}"
         self.base_url = "https://www.guidestar.org"
         self.endpoint = f"{self.base_url}{self.url}"
         self.organization_address = ""
@@ -303,7 +299,8 @@ class GuideStarScraper(
         response = self.query(self.endpoint)
         if response.status_code != 200:
             log.error(f"Error scraping {self.endpoint} - {response.status_code}")
-            return {}
+            raise Exception(f"Error scraping {self.endpoint} - {response.status_code}")
+        
         soup = BeautifulSoup(response.text, "html.parser")
         if self.initial_data.get("organization_name", None):
             self.organization_name = self.initial_data.get("organization_name", None)
@@ -327,3 +324,20 @@ class GuideStarScraper(
         data["domain"] = self.format_list([self.base_url,])
         data["urls_scraped"] = self.format_list([self.endpoint,])
         return data
+    
+    def scrape_image_only(self, url):
+        self.endpoint = url
+        response = self.query(url)
+        if response.status_code != 200:
+            log.error(f"Error scraping {self.endpoint} - {response.status_code}")
+            raise Exception(f"Error scraping {self.endpoint} - {response.status_code}")
+        
+        soup = BeautifulSoup(response.text, "html.parser")
+        data = {
+            "organization_name": self._get_organization_name(soup),
+        }
+        data["govt_reg_number"] = self.initial_data.get("govt_reg_number", None) or self.clean_number(self._get_government_number(soup)).replace("-", "")
+        data["govt_reg_number_type"] = "EIN" if data.get("govt_reg_number") else None
+        data["image"] = self._get_image(soup)
+        return data
+    

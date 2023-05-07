@@ -56,12 +56,13 @@ class NGO(models.Model):
     image = models.TextField(max_length=200, null=True)
     domain = models.CharField(max_length=200, null=True)
     urls_scraped =  models.TextField(null=True)
-
+    merged = models.BooleanField(default=False)
+    
     def __str__(self) -> str:
         return self.organization_name
     
-    class Meta:
-        ordering = ['organization_name', 'state']
+    # class Meta:
+    #     ordering = ['organization_name', 'state']
     
 class ErrorPage(models.Model):
     page = models.CharField(max_length=200, null=False)
@@ -74,3 +75,11 @@ class LastPage(models.Model):
     state = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=True)
     
+
+
+class FailedFiles(models.Model):
+    file_name = models.CharField(max_length=250, null=False, unique=True)
+    created = models.DateTimeField(auto_now=True)
+    
+    def __str__(self) -> str:
+        return self.file_name

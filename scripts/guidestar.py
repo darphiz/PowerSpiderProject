@@ -1,4 +1,5 @@
 import os
+import re
 from random import randint
 from time import sleep
 from guidestar_app.models import GuideStarIndexedUrl, ErrorPage, LastPage
@@ -197,3 +198,39 @@ def test():
     print(max_cursor)
     
     
+def extract_url(input_string):
+    pattern = r'"(https?://.*?)"'
+    return match.group(1) if (match := re.search(pattern, input_string)) else None
+    
+def stream_and_extract(file_path):
+    with open(file_path, 'r') as f:
+        for line in f:
+            yield extract_url(line)
+
+def extract_path(url):
+    if not url:
+        print("No url found")
+        return None
+    domain = "guidestar.org"
+    index = url.find(domain)
+    if index != -1:
+        return url[index + len(domain):]
+    else:
+        return None
+    
+def load_urls():        
+    counter = 0        
+    for url in stream_and_extract('gs_urls.txt'):
+        g_url = extract_path(url)
+        if not g_url:
+            continue
+        try:
+            GuideStarIndexedUrl.objects.create(url=g_url)
+            counter += 1
+            print(f"Saved {url}")
+        except IntegrityError:
+            print(f"Duplicate url found: {g_url} -> SKIPPED")
+        except Exception as e:
+            print(f"Error saving {g_url}: {str(e)}")
+    print(f"Saved {counter} new urls")
+    return

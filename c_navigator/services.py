@@ -1,6 +1,7 @@
 from contextlib import suppress
 import re
 import logging
+from c_navigator.models import NGO
 from c_navigator.utils import get_full_region_name, q_builder
 from ngo_scraper.notification import Notify
 from ngo_scraper.requests import CleanData, CauseGenerator, ProxyRequestClient
@@ -130,10 +131,20 @@ class CharityNavigatorScraper(
         org_addr = self._generate_org_address(soup) or self._generate_org_address_2(data)
         website = data.get("website").lower() if data.get("website") else self._get_org_website_from_soup(soup)
         return organization_mission, registration_year, gross_income, org_addr, website    
-      
+    
+    def _org_already_exist(self, ein):
+        if not ein:
+            return False
+        return NGO.objects.filter(govt_reg_number = ein).exists()
+        
                 
     def extract_data(self, data):    
         url_scraped = f"{self.c_url}{data.get('ein')}"
+        ein = data.get("ein", None)
+        # check if the ein is already in the database
+        if self._org_already_exist(ein):
+            return
+        
         other_data = self.get_other_data(url_scraped, data)
         organization_mission = other_data[0]        
         registration_year = other_data[1]
@@ -162,12 +173,12 @@ class CharityNavigatorScraper(
         # payload = payload if payload else q_builder(page = self.page, result_size=self.max_result)
         response = self.post_json(self.base_url, json=payload)
         if response.status_code != 200:
-            return self._log_error()
+            return self._log_error(reason=response.text)
         response = response.json()
         try:
             data = response.get("data").get("publicSearchFaceted").get("results")
-        except Exception:
-            return self._log_error()
+        except Exception as e:
+            return self._log_error(reason=str(e))
         for d in data:
             self.extract_data(d)
         return self.scraped_data
@@ -177,15 +188,16 @@ class CharityNavigatorScraper(
         try:
             response = self.post_json(self.base_url, json=payload)
             if response.status_code != 200:
-                return self._log_error()
+                return self._log_error(reason=response.text)
             response = response.json()    
             return response.get("data").get("publicSearchFaceted").get("result_count")
         except Exception:
             logger.error(f"Error getting max result")
+            print("Error getting max result")
             return 1000
 
-    def _log_error(self):
-        logger.error(f"Error in crawling page {self.page}")
+    def _log_error(self,reason=None):
+        logger.error(f"Error in crawling page {self.page} \nTraceback: \n{reason}")
         self.alert(
             Notify.error(
                 f"Error in crawling page {self.page}"
