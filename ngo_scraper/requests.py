@@ -234,7 +234,7 @@ class CleanData:
 class ImageDownloader:
     @retry(Exception, tries=2, delay=2)    
     def _download(self, image_url, file_path):
-        proxy = "http://oywhpasl-rotate:3ljqiirnl8i1@p.webshare.io:80/"
+        proxy = settings.PROXY_URL or None
         proxies = {
             "http": proxy,
             "https": proxy

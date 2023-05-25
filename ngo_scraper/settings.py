@@ -70,10 +70,10 @@ WSGI_APPLICATION = 'ngo_scraper.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':  'ngo_scraper',
-        'USER': 'Darphiz',
-        'PASSWORD': '@elonMusk',
-        'HOST': 'ngo-db-server.mysql.database.azure.com',
+        'NAME':  environ.get("DB_NAME", None),
+        'USER': environ.get("DB_USER", None),
+        'PASSWORD': environ.get("DB_PASSWORD", None),
+        'HOST': environ.get("DB_HOST", None),
         'PORT': 3306,
     }
 }

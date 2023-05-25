@@ -50,9 +50,6 @@ class NGO(models.Model):
     def __str__(self) -> str:
         return self.organization_name
     
-    class Meta:
-        unique_together = ('organization_name', 'state')
-        # ordering = ['organization_name', 'state']
 class Cause(models.Model):
     cause = models.CharField(max_length=200, unique=True, default="education")
     def __str__(self) -> str:

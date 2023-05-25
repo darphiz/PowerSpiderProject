@@ -1,3 +1,7 @@
+###### TASK MANAGERS AND SCHEDULERS ######
+# This file contains all the tasks that are to be scheduled and run by the celery beat scheduler
+# Uncomment the tasks that you want to run, can run multiple tasks at the same time
+
 SCRAPER_Q = {
     # # scrape indexed pledge urls
     # 'start_scraping_pledge_2': {
@@ -5,10 +9,10 @@ SCRAPER_Q = {
     #     'schedule' : 15.0,
     # },
     
-    'merger_orchestrator': {
-        'task' : 'merger_orchestrator',
-        'schedule' : 50.0,
-    },
+    # 'merger_orchestrator': {
+    #     'task' : 'merger_orchestrator',
+    #     'schedule' : 50.0,
+    # },
        
     # # Scraper to scrape data from global_giving website
     # "gg_url_crawler": {

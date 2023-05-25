@@ -16,14 +16,12 @@ class SummaryView(View):
 
     def get(self, request, *args, **kwargs):
         irs_xml = {
-            # "total": NGO_V2.objects.count(),
-            "total": 2290886,
+            "total": NGO_V2.objects.count(),
             "Name": "IRS XML",
             "status": "Approved"
         } 
         irs_zip = {
-            "total": 854801,
-            # "total": ZIP_NGO.objects.count(),
+            "total": ZIP_NGO.objects.count(),
             "Name": "IRS ZIP",
             "status": "Approved"
         }
@@ -35,8 +33,8 @@ class SummaryView(View):
         }
         
         fcra_app = {
-            "total": 3399,
-            # "total": FCR_NGO.objects.count(),
+
+            "total": FCR_NGO.objects.count(),
             "Name": "FCRA App",
             "status": "Approved"
         }
@@ -49,14 +47,12 @@ class SummaryView(View):
 
         global_giving = {
             "total": GlobalGivingNGO.objects.count(),
-            # "total": 3408,
             "Name": "Global Giving",
             "status": "Approved"
         }
         
         gg_india = {
-            # "total": GGIndiaNGO.objects.count(),
-            "total": 1964,
+            "total": GGIndiaNGO.objects.count(),
             "Name": "Guidestar India",
             "status": "Approved"
         }
